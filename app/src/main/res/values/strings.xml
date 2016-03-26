@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Pathfinder Combat Helper</string>
+    <string name="contact_me_email">Contact me at: info\@rekijan.nl</string>
+    <string name="select_item_start">Please select an item from the navigation bar</string>
+
+    <!-- ContentDescriptions-->
+    <string name="app_icon">App icon</string>
+
+    <!-- Navigation Drawer-->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="cmb_bull_rush">Bull Rush</string>
+    <string name="cmb_dirty_trick">Dirty Trick</string>
+    <string name="cmb_disarm">Disarm</string>
+    <string name="cmb_drag">Drag</string>
+    <string name="cmb_grapple">Grapple</string>
+    <string name="cmb_overrun">Overrun</string>
+    <string name="cmb_reposition">Reposition</string>
+    <string name="cmb_steal">Steal</string>
+    <string name="cmb_sunder">Sunder</string>
+
+
+    <!-- Settings-->
+    <string name="action_settings">Settings</string>
+
+
+</resources>
