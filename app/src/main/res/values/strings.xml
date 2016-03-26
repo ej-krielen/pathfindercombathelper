@@ -20,9 +20,10 @@
     <string name="cmb_steal">Steal</string>
     <string name="cmb_sunder">Sunder</string>
 
-
     <!-- Settings-->
     <string name="action_settings">Settings</string>
 
+    <!-- Grapple-->
+    <string name="grapple_start_question">First question</string>
 
 </resources>

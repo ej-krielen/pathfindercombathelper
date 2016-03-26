@@ -1,7 +1,10 @@
 package nl.rekijan.pathfindercombathelper;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -9,10 +12,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+
+import nl.rekijan.pathfindercombathelper.ui.fragments.GrappleFragment;
+import nl.rekijan.pathfindercombathelper.ui.fragments.StartFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, StartFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,19 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (navigationView != null) {
             navigationView.setNavigationItemSelectedListener(this);
+        }
+
+        if (findViewById(R.id.fragment_container) != null) {
+            //if we're being restored from a previous state,
+            // then we don't need to do anything and should return or else
+            // we could end up with overlapping fragments.
+            if (savedInstanceState != null) {
+                return;
+            }
+
+
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, StartFragment.newInstance()).addToBackStack("START").commit();
         }
     }
 
@@ -75,23 +93,16 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        //TODO handle actions
-        TextView tv = (TextView) findViewById(R.id.startup_textView);
-        String currentView;
         if (id == R.id.nav_bull_rush) {
-            if (tv != null) {
-                currentView = getString(R.string.cmb_bull_rush);
-                tv.setText(currentView);
-            }
+
         } else if (id == R.id.nav_dirty_trick) {
-            if (tv != null) {
-                currentView = getString(R.string.cmb_dirty_trick);
-                tv.setText(currentView);
-            }
+
         } else if (id == R.id.nav_disarm) {
 
         } else if (id == R.id.nav_drag) {
-
+            replaceFragment(StartFragment.newInstance());
+        } else if (id == R.id.nav_grapple) {
+            replaceFragment(GrappleFragment.newInstance());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -99,5 +110,17 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         }
         return true;
+    }
+
+    private void replaceFragment(Fragment newFragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
