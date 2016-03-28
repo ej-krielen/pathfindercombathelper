@@ -13,7 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import nl.rekijan.pathfindercombathelper.ui.fragments.GrappleFragment;
+import nl.rekijan.pathfindercombathelper.ui.fragments.SurveyFragment;
 import nl.rekijan.pathfindercombathelper.ui.fragments.StartFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -47,9 +47,10 @@ public class MainActivity extends AppCompatActivity
                 return;
             }
 
-
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, StartFragment.newInstance()).addToBackStack("START").commit();
+                    .add(R.id.fragment_container, StartFragment.newInstance())
+                    .addToBackStack("START")
+                    .commit();
         }
     }
 
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_drag) {
             replaceFragment(StartFragment.newInstance());
         } else if (id == R.id.nav_grapple) {
-            replaceFragment(GrappleFragment.newInstance());
+            replaceFragment(SurveyFragment.newInstance(getString(R.string.grapple_start_question)));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

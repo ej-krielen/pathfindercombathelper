@@ -24,6 +24,6 @@
     <string name="action_settings">Settings</string>
 
     <!-- Grapple-->
-    <string name="grapple_start_question">First question</string>
+    <string name="grapple_start_question">Which situation applies?</string>
 
 </resources>

@@ -2,9 +2,12 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryLight">#7986CB</color>
     <color name="colorAccent">#FF5722</color>
 
-    <color name="colorPrimaryLight">#7986CB</color>
+    <color name="question_background">#FFFFF7C4</color>
+    <color name="answer_background">#FFFFFF</color>
+    <color name="note_background">#FFEF9A9A</color>
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
