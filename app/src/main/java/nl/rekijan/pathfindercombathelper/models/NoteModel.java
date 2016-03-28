@@ -1,5 +1,8 @@
 package nl.rekijan.pathfindercombathelper.models;
 
+
+import android.support.v7.app.AlertDialog;
+
 /**
  * Custom class to set fields for Notes
  *
@@ -8,11 +11,11 @@ package nl.rekijan.pathfindercombathelper.models;
  */
 public class NoteModel {
     private String text;
-    private String navigation;
+    private AlertDialog dialog;
 
-    public NoteModel(String text, String navigation) {
+    public NoteModel(String text, AlertDialog dialog) {
         this.text = text;
-        this.navigation = navigation;
+        this.dialog = dialog;
     }
 
     public NoteModel(String text) {
@@ -27,11 +30,11 @@ public class NoteModel {
         this.text = text;
     }
 
-    public String getNavigation() {
-        return navigation;
+    public AlertDialog getDialog() {
+        return dialog;
     }
 
-    public void setNavigation(String navigation) {
-        this.navigation = navigation;
+    public void setDialog(AlertDialog dialog) {
+        this.dialog = dialog;
     }
 }

@@ -25,9 +25,5 @@ public class HeaderTextView extends TextView {
         }
         int spacing = (int) Measurements.getInstance(context).convertDpToPixel(8, context);
         this.setPadding(spacing, spacing, spacing, spacing);
-//        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-//                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-//        params.setMargins(spacing, spacing, spacing, spacing);
-//        this.setLayoutParams(params);
     }
 }

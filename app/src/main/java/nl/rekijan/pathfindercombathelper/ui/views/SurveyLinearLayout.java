@@ -61,8 +61,8 @@ public class SurveyLinearLayout extends LinearLayout {
         for (NoteModel note : notes) {
             NoteTextView noteTextView = new NoteTextView(getContext());
             noteTextView.setText(note.getText());
-            if (!TextUtils.isEmpty(note.getNavigation()))
-                noteTextView.setNavigationClickListener(note.getNavigation());
+            if (note.getDialog() != null)
+                noteTextView.setNavigationClickListener(note.getDialog());
             this.addView(noteTextView);
         }
     }

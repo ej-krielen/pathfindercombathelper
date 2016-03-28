@@ -8,6 +8,7 @@ import nl.rekijan.pathfindercombathelper.R;
 import nl.rekijan.pathfindercombathelper.models.AnswerModel;
 import nl.rekijan.pathfindercombathelper.models.NoteModel;
 import nl.rekijan.pathfindercombathelper.models.SurveyModel;
+import nl.rekijan.pathfindercombathelper.utilities.NavigationHandler;
 
 /**
  * Surveys are built here based on the question String parameter
@@ -38,10 +39,12 @@ public final class GrappleSurveys {
 
             survey.setAnswers(Arrays.asList(answer1, answer2, answer3));
 
-            NoteModel note = new NoteModel(context.getString(R.string.grapple_note_start_action));
-            NoteModel noteL = new NoteModel(context.getString(R.string.grapple_note_start_grapple_condition), "note clicked");
+            NoteModel note1 = new NoteModel(context.getString(R.string.grapple_note_start_action));
+            NoteModel note2 = new NoteModel(context.getString(R.string.grapple_note_start_grapple_condition),
+                    NavigationHandler.getInstance(context)
+                            .createDialog(context, context.getString(R.string.conditions), context.getString(R.string.condition_grappled)));
 
-            survey.setNotes(Arrays.asList(note, noteL));
+            survey.setNotes(Arrays.asList(note1, note2));
         }
 
         return survey;

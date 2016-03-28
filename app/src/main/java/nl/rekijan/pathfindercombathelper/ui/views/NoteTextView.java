@@ -1,10 +1,10 @@
 package nl.rekijan.pathfindercombathelper.ui.views;
 
 import android.content.Context;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import nl.rekijan.pathfindercombathelper.R;
 import nl.rekijan.pathfindercombathelper.utilities.Measurements;
@@ -28,12 +28,11 @@ public class NoteTextView extends TextView {
         this.setLayoutParams(params);
     }
 
-    public void setNavigationClickListener(final String toast) {
+    public void setNavigationClickListener(final AlertDialog dialog) {
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), toast, Toast.LENGTH_SHORT).show();
-
+                dialog.show();
             }
         });
     }
