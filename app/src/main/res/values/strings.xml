@@ -23,7 +23,16 @@
     <!-- Settings-->
     <string name="action_settings">Settings</string>
 
+    <!-- Surveys-->
+    <string name="notes_title">Notes</string>
+
     <!-- Grapple-->
-    <string name="grapple_start_question">Which situation applies?</string>
+    <string name="grapple_question_start">Which situation applies?</string>
+    <string name="grapple_answer_start_self">I want to start a grapple on my opponent.</string>
+    <string name="grapple_answer_start_grappled">It\'s my turn and my opponent is grappling me.</string>
+    <string name="grapple_answer_start_grappling">It\'s my turn and I am grappling my opponent.</string>
+    <string name="grapple_note_start_action">Normally starting a grapple is a standard action.</string>
+    <string name="grapple_note_start_grapple_condition">Read more about the grappled condition.</string>
+
 
 </resources>

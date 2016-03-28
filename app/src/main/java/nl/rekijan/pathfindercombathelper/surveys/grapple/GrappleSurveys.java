@@ -29,16 +29,17 @@ public final class GrappleSurveys {
     public SurveyModel createSurvey(Context context, String surveyName) {
         SurveyModel survey = new SurveyModel();
 
-        if (context.getString(R.string.grapple_start_question).equals(surveyName)) {
+        if (context.getString(R.string.grapple_question_start).equals(surveyName)) {
             survey.setQuestion(surveyName);
 
-            AnswerModel answer1 = new AnswerModel("1", "1 clicked");
-            AnswerModel answer2 = new AnswerModel("2", "2 clicked");
+            AnswerModel answer1 = new AnswerModel(context.getString(R.string.grapple_answer_start_self), "1 clicked");
+            AnswerModel answer2 = new AnswerModel(context.getString(R.string.grapple_answer_start_grappled), "2 clicked");
+            AnswerModel answer3 = new AnswerModel(context.getString(R.string.grapple_answer_start_grappling), "3 clicked");
 
-            survey.setAnswers(Arrays.asList(answer1, answer2));
+            survey.setAnswers(Arrays.asList(answer1, answer2, answer3));
 
-            NoteModel note = new NoteModel("Note no link");
-            NoteModel noteL = new NoteModel("Note with link", "note clicked");
+            NoteModel note = new NoteModel(context.getString(R.string.grapple_note_start_action));
+            NoteModel noteL = new NoteModel(context.getString(R.string.grapple_note_start_grapple_condition), "note clicked");
 
             survey.setNotes(Arrays.asList(note, noteL));
         }

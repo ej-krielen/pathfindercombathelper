@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_drag) {
             replaceFragment(StartFragment.newInstance());
         } else if (id == R.id.nav_grapple) {
-            replaceFragment(SurveyFragment.newInstance(getString(R.string.grapple_start_question)));
+            replaceFragment(SurveyFragment.newInstance(getString(R.string.grapple_question_start)));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

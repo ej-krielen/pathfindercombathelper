@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 
 import java.util.List;
 
+import nl.rekijan.pathfindercombathelper.R;
 import nl.rekijan.pathfindercombathelper.models.AnswerModel;
 import nl.rekijan.pathfindercombathelper.models.NoteModel;
 import nl.rekijan.pathfindercombathelper.models.SurveyModel;
@@ -54,6 +55,9 @@ public class SurveyLinearLayout extends LinearLayout {
     }
 
     private void addNotes(List<NoteModel> notes) {
+        HeaderTextView header = new HeaderTextView(getContext());
+        header.setText(getContext().getString(R.string.notes_title));
+        this.addView(header);
         for (NoteModel note : notes) {
             NoteTextView noteTextView = new NoteTextView(getContext());
             noteTextView.setText(note.getText());
