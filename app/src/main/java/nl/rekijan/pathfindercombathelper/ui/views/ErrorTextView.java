@@ -1,7 +1,6 @@
 package nl.rekijan.pathfindercombathelper.ui.views;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -14,12 +13,11 @@ import nl.rekijan.pathfindercombathelper.utilities.CommonUtil;
  * @author Erik-Jan Krielen ej.krielen@gmail.com
  * @since 27-3-2016
  */
-public class QuestionTextView extends TextView {
+public class ErrorTextView extends TextView {
 
-    public QuestionTextView(Context context) {
+    public ErrorTextView(final Context context) {
         super(context);
-        this.setBackgroundResource(R.drawable.back_question);
-        this.setTypeface(Typeface.DEFAULT_BOLD);
+        this.setBackgroundResource(R.drawable.back_error);
         int spacing = (int) CommonUtil.getInstance(context).convertDpToPixel(8, context);
         this.setPadding(spacing, spacing, spacing, spacing);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(

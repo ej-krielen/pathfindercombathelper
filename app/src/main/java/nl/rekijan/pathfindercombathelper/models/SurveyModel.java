@@ -12,6 +12,7 @@ public class SurveyModel {
     private String question;
     private List<AnswerModel> answers;
     private List<NoteModel> notes;
+    private String errorMessage;
 
     public String getQuestion() {
         return question;
@@ -35,5 +36,13 @@ public class SurveyModel {
 
     public void setNotes(List<NoteModel> notes) {
         this.notes = notes;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }

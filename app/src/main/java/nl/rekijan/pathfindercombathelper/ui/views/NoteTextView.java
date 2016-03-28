@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import nl.rekijan.pathfindercombathelper.R;
-import nl.rekijan.pathfindercombathelper.utilities.Measurements;
+import nl.rekijan.pathfindercombathelper.utilities.CommonUtil;
 
 /**
  * Custom class to create custom layout
@@ -20,7 +20,7 @@ public class NoteTextView extends TextView {
     public NoteTextView(Context context) {
         super(context);
         this.setBackgroundResource(R.drawable.back_note);
-        int spacing = (int) Measurements.getInstance(context).convertDpToPixel(8, context);
+        int spacing = (int) CommonUtil.getInstance(context).convertDpToPixel(8, context);
         this.setPadding(spacing, spacing, spacing, spacing);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);

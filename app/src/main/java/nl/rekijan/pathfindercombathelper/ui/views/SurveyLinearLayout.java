@@ -20,16 +20,24 @@ import nl.rekijan.pathfindercombathelper.surveys.grapple.GrappleSurveys;
  * @since 27-3-2016
  */
 public class SurveyLinearLayout extends LinearLayout {
+    private Context mContext;
+
     public SurveyLinearLayout(Context context) {
         super(context);
     }
 
     public SurveyLinearLayout(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
+        mContext = context;
     }
 
     public void addSurveyToLayout(String surveyName) {
-        SurveyModel survey = GrappleSurveys.getInstance(getContext()).createSurvey(getContext(), surveyName);
+        SurveyModel survey = GrappleSurveys.getInstance(mContext).createSurvey(mContext, surveyName);
+        if (!TextUtils.isEmpty(survey.getErrorMessage())) {
+            displayError(survey.getErrorMessage());
+            return;
+        }
+
         if (!TextUtils.isEmpty(survey.getQuestion()))
             addQuestion(survey.getQuestion());
         if (survey.getAnswers() != null && survey.getAnswers().size() > 0)
@@ -38,15 +46,25 @@ public class SurveyLinearLayout extends LinearLayout {
             addNotes(survey.getNotes());
     }
 
+    private void displayError(String errorMessage) {
+        HeaderTextView header = new HeaderTextView(mContext);
+        header.setText(mContext.getString(R.string.error_title));
+        this.addView(header);
+        ErrorTextView errorTextView = new ErrorTextView(mContext);
+        errorTextView.setText(errorMessage);
+        this.addView(errorTextView);
+        this.addView(new EmailButton(mContext));
+    }
+
     private void addQuestion(String question) {
-        QuestionTextView questionTextView = new QuestionTextView(getContext());
+        QuestionTextView questionTextView = new QuestionTextView(mContext);
         questionTextView.setText(question);
         this.addView(questionTextView);
     }
 
     private void addAnswers(List<AnswerModel> answers) {
         for (AnswerModel answer : answers) {
-            AnswerTextView answerTextView = new AnswerTextView(getContext());
+            AnswerTextView answerTextView = new AnswerTextView(mContext);
             answerTextView.setText(answer.getText());
             if (!TextUtils.isEmpty(answer.getNavigation()))
                 answerTextView.setNavigationClickListener(answer.getNavigation());
@@ -55,11 +73,11 @@ public class SurveyLinearLayout extends LinearLayout {
     }
 
     private void addNotes(List<NoteModel> notes) {
-        HeaderTextView header = new HeaderTextView(getContext());
-        header.setText(getContext().getString(R.string.notes_title));
+        HeaderTextView header = new HeaderTextView(mContext);
+        header.setText(mContext.getString(R.string.notes_title));
         this.addView(header);
         for (NoteModel note : notes) {
-            NoteTextView noteTextView = new NoteTextView(getContext());
+            NoteTextView noteTextView = new NoteTextView(mContext);
             noteTextView.setText(note.getText());
             if (note.getDialog() != null)
                 noteTextView.setNavigationClickListener(note.getDialog());

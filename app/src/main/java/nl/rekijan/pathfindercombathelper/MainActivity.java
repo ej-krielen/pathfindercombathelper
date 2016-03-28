@@ -1,6 +1,5 @@
 package nl.rekijan.pathfindercombathelper;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -13,11 +12,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import nl.rekijan.pathfindercombathelper.ui.fragments.SurveyFragment;
 import nl.rekijan.pathfindercombathelper.ui.fragments.StartFragment;
+import nl.rekijan.pathfindercombathelper.ui.fragments.SurveyFragment;
+import nl.rekijan.pathfindercombathelper.ui.views.AnswerTextView;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, StartFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, AnswerTextView.OnAnswerPressedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-
+    public void onAnswerPressed(String newFragment) {
+        replaceFragment(SurveyFragment.newInstance(newFragment));
     }
 }

@@ -1,12 +1,19 @@
 <resources>
+    <!-- General-->
     <string name="app_name">Pathfinder Combat Helper</string>
     <string name="contact_me_email">Contact me at: info\@rekijan.nl</string>
-    <string name="select_item_start">Please select an item from the navigation bar</string>
+    <string name="email_button">Send email</string>
+
+    <!-- Errors-->
+    <string name="error_title">Error occurred</string>
+    <string name="error_email_subject">Error report for</string>
+    <string name="error_surveyName">Oops, looks like you discovered a mistake. \n\nE-mail me at info\@rekijan.nl and mention which question you were at and which answer you picked.</string>
 
     <!-- ContentDescriptions-->
     <string name="app_icon">App icon</string>
 
     <!-- Navigation Drawer-->
+    <string name="select_item_start">Please select an item from the navigation bar</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

@@ -45,6 +45,8 @@ public final class GrappleSurveys {
                             .createDialog(context, context.getString(R.string.conditions), context.getString(R.string.condition_grappled)));
 
             survey.setNotes(Arrays.asList(note1, note2));
+        } else {
+            survey.setErrorMessage(context.getString(R.string.error_surveyName));
         }
 
         return survey;

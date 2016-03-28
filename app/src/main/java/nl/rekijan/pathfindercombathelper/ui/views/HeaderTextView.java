@@ -5,7 +5,7 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.widget.TextView;
 
-import nl.rekijan.pathfindercombathelper.utilities.Measurements;
+import nl.rekijan.pathfindercombathelper.utilities.CommonUtil;
 
 /**
  * Custom class to create custom layout
@@ -23,7 +23,7 @@ public class HeaderTextView extends TextView {
         } else {
             this.setTextAppearance(context, android.R.style.TextAppearance_Large);
         }
-        int spacing = (int) Measurements.getInstance(context).convertDpToPixel(8, context);
+        int spacing = (int) CommonUtil.getInstance(context).convertDpToPixel(8, context);
         this.setPadding(spacing, spacing, spacing, spacing);
     }
 }

@@ -1,7 +1,9 @@
 package nl.rekijan.pathfindercombathelper.utilities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.util.DisplayMetrics;
 
 /**
@@ -10,17 +12,16 @@ import android.util.DisplayMetrics;
  * @author Erik-Jan Krielen ej.krielen@gmail.com
  * @since 3-10-2015
  */
-public final class Measurements {
+public final class CommonUtil {
 
-    private static final String TAG = "Measurements";
+    private static final String TAG = "CommonUtil";
 
-    private static Measurements sInstance = null;
+    private static CommonUtil sInstance = null;
 
-    public static synchronized Measurements getInstance(Context context) {
+    public static synchronized CommonUtil getInstance(Context context) {
         if (sInstance == null) {
-            sInstance = new Measurements();
+            sInstance = new CommonUtil();
         }
-
         return sInstance;
     }
 
@@ -37,16 +38,13 @@ public final class Measurements {
         return dp * (metrics.densityDpi / 160f);
     }
 
-    /**
-     * This method converts device specific pixels to density independent pixels.
-     *
-     * @param px      A value in px (pixels) unit. Which we need to convert into db
-     * @param context Context to get resources and device specific display metrics
-     * @return A float value to represent dp equivalent to px value
-     */
-    public float convertPixelsToDp(float px, Context context) {
-        Resources resources = context.getResources();
-        DisplayMetrics metrics = resources.getDisplayMetrics();
-        return px / (metrics.densityDpi / 160f);
+    public void startEmailActivity(Context context, String[] emailAddresses, String subject) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_EMAIL, emailAddresses);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        if (intent.resolveActivity(context.getPackageManager()) != null) {
+            context.startActivity(intent);
+        }
     }
 }
