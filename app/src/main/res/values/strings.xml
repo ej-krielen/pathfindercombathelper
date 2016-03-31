@@ -11,8 +11,9 @@
 
     <!-- ContentDescriptions-->
     <string name="app_icon">App icon</string>
-    <string name="answer_icon">Answer icon</string>
     <string name="question_icon">Question icon</string>
+    <string name="answer_icon">Answer icon</string>
+    <string name="note_icon">Note icon</string>
 
     <!-- Navigation Drawer-->
     <string name="navigation_search_hint">Filter the list, for example grapple</string>

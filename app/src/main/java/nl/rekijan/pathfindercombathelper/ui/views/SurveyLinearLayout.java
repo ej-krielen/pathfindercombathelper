@@ -47,7 +47,7 @@ public class SurveyLinearLayout extends LinearLayout {
     }
 
     private void displayError(String errorMessage) {
-        HeaderTextView header = new HeaderTextView(mContext);
+        HeaderLinearLayout header = new HeaderLinearLayout(mContext);
         header.setText(mContext.getString(R.string.error_title));
         this.addView(header);
         ErrorTextView errorTextView = new ErrorTextView(mContext);
@@ -73,15 +73,15 @@ public class SurveyLinearLayout extends LinearLayout {
     }
 
     private void addNotes(List<NoteModel> notes) {
-        HeaderTextView header = new HeaderTextView(mContext);
+        HeaderLinearLayout header = new HeaderLinearLayout(mContext);
         header.setText(mContext.getString(R.string.notes_title));
         this.addView(header);
         for (NoteModel note : notes) {
-            NoteTextView noteTextView = new NoteTextView(mContext);
-            noteTextView.setText(note.getText());
+            NoteLinearLayout noteLayout = new NoteLinearLayout(mContext);
+            noteLayout.setText(note.getText());
             if (note.getDialog() != null)
-                noteTextView.setNavigationClickListener(note.getDialog());
-            this.addView(noteTextView);
+                noteLayout.setNavigationClickListener(note.getDialog());
+            this.addView(noteLayout);
         }
     }
 }

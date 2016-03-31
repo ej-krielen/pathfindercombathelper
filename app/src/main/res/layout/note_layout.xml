@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/note_linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
@@ -11,18 +12,18 @@
     android:paddingTop="@dimen/small_padding">
 
     <ImageView
+        android:id="@+id/note_imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:contentDescription="@string/answer_icon"
-        android:src="@android:drawable/ic_menu_send" />
+        android:contentDescription="@string/note_icon"
+        android:src="@android:drawable/ic_dialog_info" />
 
     <TextView
-        android:textColor="@color/white"
-        android:id="@+id/answer_textView"
+        android:id="@+id/note_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:paddingLeft="@dimen/small_padding"
-        android:paddingRight="@dimen/small_padding" />
+        android:paddingRight="@dimen/small_padding"
+        android:textColor="@color/white" />
 </LinearLayout>

@@ -1,19 +1,14 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLight"
     tools:context=".ui.fragments.SurveyFragment">
 
-    <ScrollView
+    <nl.rekijan.pathfindercombathelper.ui.views.SurveyLinearLayout
+        android:id="@+id/survey_ll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
 
-        <nl.rekijan.pathfindercombathelper.ui.views.SurveyLinearLayout
-            android:id="@+id/survey_ll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-
-    </ScrollView>
-
-</FrameLayout>
+</ScrollView>
