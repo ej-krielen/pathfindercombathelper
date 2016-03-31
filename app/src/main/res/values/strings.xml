@@ -13,7 +13,7 @@
     <string name="app_icon">App icon</string>
 
     <!-- Navigation Drawer-->
-    <string name="select_item_start">Please select an item from the navigation bar</string>
+    <string name="navigation_search_hint">Filter the list, for example grapple</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
