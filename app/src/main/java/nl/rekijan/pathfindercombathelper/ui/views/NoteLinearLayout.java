@@ -17,9 +17,20 @@ import nl.rekijan.pathfindercombathelper.R;
  * @since 27-3-2016
  */
 public class NoteLinearLayout extends LinearLayout {
+    public interface OnNotePressedListener {
+        void onNotePressed(AlertDialog dialog);
+    }
+
+    private OnNotePressedListener mListener;
 
     public NoteLinearLayout(Context context) {
         super(context);
+        if (context instanceof OnNotePressedListener) {
+            mListener = (OnNotePressedListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnAnswerPressedListener");
+        }
         LayoutInflater.from(context).inflate(R.layout.note_layout, this, true);
     }
 
@@ -33,7 +44,9 @@ public class NoteLinearLayout extends LinearLayout {
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.show();
+                if (mListener != null) {
+                    mListener.onNotePressed(dialog);
+                }
             }
         });
     }
