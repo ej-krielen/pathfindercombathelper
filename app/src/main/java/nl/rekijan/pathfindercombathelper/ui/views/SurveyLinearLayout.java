@@ -57,9 +57,9 @@ public class SurveyLinearLayout extends LinearLayout {
     }
 
     private void addQuestion(String question) {
-        QuestionTextView questionTextView = new QuestionTextView(mContext);
-        questionTextView.setText(question);
-        this.addView(questionTextView);
+        QuestionLinearLayout questionLayout = new QuestionLinearLayout(mContext);
+        questionLayout.setText(question);
+        this.addView(questionLayout);
     }
 
     private void addAnswers(List<AnswerModel> answers) {
