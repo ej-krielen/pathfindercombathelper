@@ -1,0 +1,23 @@
+<nl.rekijan.pathfindercombathelper.ui.views.NavigationView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/navigation_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@android:drawable/ic_search_category_default"
+        android:drawableRight="@android:drawable/ic_search_category_default"
+        android:hint="@string/navigation_search_hint"
+        android:inputType="textCapSentences|textAutoCorrect|textFilter" />
+
+    <ListView
+        android:id="@+id/navigation_listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/navigation_editText" />
+
+</nl.rekijan.pathfindercombathelper.ui.views.NavigationView>
+
+

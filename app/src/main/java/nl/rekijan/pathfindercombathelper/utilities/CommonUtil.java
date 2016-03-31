@@ -1,10 +1,13 @@
 package nl.rekijan.pathfindercombathelper.utilities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.util.DisplayMetrics;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 /**
  * Methods containing ui measurements
@@ -46,5 +49,15 @@ public final class CommonUtil {
         if (intent.resolveActivity(context.getPackageManager()) != null) {
             context.startActivity(intent);
         }
+    }
+
+    /**
+     * Hides keyboard if View lost focus
+     * @param activity calling activity
+     * @param v View
+     */
+    public void hideSoftKeyboard(Activity activity, View v) {
+        InputMethodManager imm =  (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 }

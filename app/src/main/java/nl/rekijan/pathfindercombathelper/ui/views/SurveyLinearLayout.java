@@ -64,11 +64,11 @@ public class SurveyLinearLayout extends LinearLayout {
 
     private void addAnswers(List<AnswerModel> answers) {
         for (AnswerModel answer : answers) {
-            AnswerTextView answerTextView = new AnswerTextView(mContext);
-            answerTextView.setText(answer.getText());
+            AnswerLinearLayout answerLayout = new AnswerLinearLayout(mContext);
+            answerLayout.setText(answer.getText());
             if (!TextUtils.isEmpty(answer.getNavigation()))
-                answerTextView.setNavigationClickListener(answer.getNavigation());
-            this.addView(answerTextView);
+                answerLayout.setNavigationClickListener(answer.getNavigation());
+            this.addView(answerLayout);
         }
     }
 

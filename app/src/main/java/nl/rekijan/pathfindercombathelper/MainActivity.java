@@ -14,10 +14,10 @@ import android.view.MenuItem;
 
 import nl.rekijan.pathfindercombathelper.ui.fragments.StartFragment;
 import nl.rekijan.pathfindercombathelper.ui.fragments.SurveyFragment;
-import nl.rekijan.pathfindercombathelper.ui.views.AnswerTextView;
+import nl.rekijan.pathfindercombathelper.ui.views.AnswerLinearLayout;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, AnswerTextView.OnAnswerPressedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, AnswerLinearLayout.OnAnswerPressedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
+    //TODO replace with a custom view that has a ListView that you can filter with an EditTextView
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();

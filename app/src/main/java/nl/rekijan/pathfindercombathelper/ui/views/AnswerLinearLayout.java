@@ -1,12 +1,12 @@
 package nl.rekijan.pathfindercombathelper.ui.views;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import nl.rekijan.pathfindercombathelper.R;
-import nl.rekijan.pathfindercombathelper.utilities.CommonUtil;
 
 /**
  * Custom class to create custom layout
@@ -14,7 +14,7 @@ import nl.rekijan.pathfindercombathelper.utilities.CommonUtil;
  * @author Erik-Jan Krielen ej.krielen@gmail.com
  * @since 27-3-2016
  */
-public class AnswerTextView extends TextView {
+public class AnswerLinearLayout extends LinearLayout {
 
     public interface OnAnswerPressedListener {
         void onAnswerPressed(String newFragment);
@@ -22,7 +22,7 @@ public class AnswerTextView extends TextView {
 
     private OnAnswerPressedListener mListener;
 
-    public AnswerTextView(Context context) {
+    public AnswerLinearLayout(Context context) {
         super(context);
         if (context instanceof OnAnswerPressedListener) {
             mListener = (OnAnswerPressedListener) context;
@@ -30,13 +30,7 @@ public class AnswerTextView extends TextView {
             throw new RuntimeException(context.toString()
                     + " must implement OnAnswerPressedListener");
         }
-        this.setBackgroundResource(R.drawable.back_answer);
-        int spacing = (int) CommonUtil.getInstance(context).convertDpToPixel(8, context);
-        this.setPadding(spacing, spacing, spacing, spacing);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.setMargins(spacing, spacing, spacing, spacing);
-        this.setLayoutParams(params);
+        LayoutInflater.from(context).inflate(R.layout.answer_layout, this, true);
     }
 
     public void setNavigationClickListener(final String newFragment) {
@@ -48,5 +42,10 @@ public class AnswerTextView extends TextView {
                 }
             }
         });
+    }
+
+    public void setText(String answerText) {
+        TextView tv = (TextView) findViewById(R.id.answer_textView);
+        tv.setText(answerText);
     }
 }
