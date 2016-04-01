@@ -7,7 +7,7 @@
     <!-- Errors-->
     <string name="error_title">Error occurred</string>
     <string name="error_email_subject">Error report for</string>
-    <string name="error_surveyName">Oops, looks like you discovered a mistake. \n\nE-mail me at info\@rekijan.nl and mention which question you were at and which answer you picked.</string>
+    <string name="error_surveyName">Oops, looks like you discovered a bug. \n\nE-mail me at info\@rekijan.nl and mention which question you were at and which answer you picked.</string>
 
     <!-- ContentDescriptions-->
     <string name="app_icon">App icon</string>

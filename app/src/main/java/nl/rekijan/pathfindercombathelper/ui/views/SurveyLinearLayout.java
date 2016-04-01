@@ -50,10 +50,9 @@ public class SurveyLinearLayout extends LinearLayout {
         HeaderLinearLayout header = new HeaderLinearLayout(mContext);
         header.setText(mContext.getString(R.string.error_title));
         this.addView(header);
-        ErrorTextView errorTextView = new ErrorTextView(mContext);
-        errorTextView.setText(errorMessage);
-        this.addView(errorTextView);
-        this.addView(new EmailButton(mContext));
+        ErrorLinearLayout errorLayout = new ErrorLinearLayout(mContext);
+        errorLayout.setText(errorMessage);
+        this.addView(errorLayout);
     }
 
     private void addQuestion(String question) {
