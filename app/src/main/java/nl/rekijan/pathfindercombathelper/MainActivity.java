@@ -1,6 +1,5 @@
 package nl.rekijan.pathfindercombathelper;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -8,21 +7,24 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import nl.rekijan.pathfindercombathelper.ui.dialogs.CustomDialogFragment;
 import nl.rekijan.pathfindercombathelper.ui.fragments.StartFragment;
 import nl.rekijan.pathfindercombathelper.ui.fragments.SurveyFragment;
 import nl.rekijan.pathfindercombathelper.ui.views.AnswerLinearLayout;
 import nl.rekijan.pathfindercombathelper.ui.views.NoteLinearLayout;
 
+import static nl.rekijan.pathfindercombathelper.AppConstants.DIALOG_TAG;
+import static nl.rekijan.pathfindercombathelper.AppConstants.START_FRAGMENT_TAG;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, AnswerLinearLayout.OnAnswerPressedListener, NoteLinearLayout.OnNotePressedListener {
 
-    private Dialog mDialog;
+    private CustomDialogFragment mDialogFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity
 
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, StartFragment.newInstance())
-                    .addToBackStack("START")
+                    .addToBackStack(START_FRAGMENT_TAG)
                     .commit();
         }
     }
@@ -132,13 +134,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onNotePressed(AlertDialog dialog) {
+    public void onNotePressed(CustomDialogFragment dialogFragment) {
         //Hide previous dialog if there is one
-        if (mDialog != null && mDialog.isShowing())
-            mDialog.dismiss();
+        if (mDialogFragment != null && mDialogFragment.getDialog().isShowing())
+            mDialogFragment.dismiss();
         //Show new dialog
-        mDialog = dialog != null ? dialog : null;
-        if (mDialog != null)
-            mDialog.show();
+        mDialogFragment = dialogFragment != null ? dialogFragment : null;
+        if (mDialogFragment != null)
+            mDialogFragment.show(getSupportFragmentManager(), DIALOG_TAG);
     }
 }

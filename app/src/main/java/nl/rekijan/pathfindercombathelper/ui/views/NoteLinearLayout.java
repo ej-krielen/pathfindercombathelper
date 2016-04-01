@@ -2,13 +2,13 @@ package nl.rekijan.pathfindercombathelper.ui.views;
 
 import android.content.Context;
 import android.os.Build;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import nl.rekijan.pathfindercombathelper.R;
+import nl.rekijan.pathfindercombathelper.ui.dialogs.CustomDialogFragment;
 
 /**
  * Custom class to create custom layout
@@ -18,7 +18,7 @@ import nl.rekijan.pathfindercombathelper.R;
  */
 public class NoteLinearLayout extends LinearLayout {
     public interface OnNotePressedListener {
-        void onNotePressed(AlertDialog dialog);
+        void onNotePressed(CustomDialogFragment dialogFragment);
     }
 
     private OnNotePressedListener mListener;
@@ -29,12 +29,12 @@ public class NoteLinearLayout extends LinearLayout {
             mListener = (OnNotePressedListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnAnswerPressedListener");
+                    + " must implement OnNotePressedListener");
         }
         LayoutInflater.from(context).inflate(R.layout.note_layout, this, true);
     }
 
-    public void setNavigationClickListener(final AlertDialog dialog) {
+    public void setNavigationClickListener(final CustomDialogFragment dialogFragment) {
         LinearLayout ll = (LinearLayout) findViewById(R.id.note_linearLayout);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             ll.setBackgroundColor(getContext().getColor(R.color.colorAccent));
@@ -45,7 +45,7 @@ public class NoteLinearLayout extends LinearLayout {
             @Override
             public void onClick(View v) {
                 if (mListener != null) {
-                    mListener.onNotePressed(dialog);
+                    mListener.onNotePressed(dialogFragment);
                 }
             }
         });

@@ -2,7 +2,13 @@ package nl.rekijan.pathfindercombathelper.utilities;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+
+import nl.rekijan.pathfindercombathelper.ui.dialogs.CustomDialogFragment;
+
+import static nl.rekijan.pathfindercombathelper.AppConstants.DIALOG_MESSAGE;
+import static nl.rekijan.pathfindercombathelper.AppConstants.DIALOG_TITLE;
 
 /**
  * Class for generic handling of the navigation on Answers and Notes
@@ -20,7 +26,6 @@ public class NavigationHandler {
         if (sInstance == null) {
             sInstance = new NavigationHandler();
         }
-
         return sInstance;
     }
 
@@ -33,5 +38,21 @@ public class NavigationHandler {
             }
         });
         return builder.create();
+    }
+
+    /**
+     * Method to make dialogFragment easier.
+     *
+     * @param title   of dialog
+     * @param message content of dialog
+     * @return CustomDialogFragment
+     */
+    public CustomDialogFragment createDialogFragment(String title, String message) {
+        CustomDialogFragment dialogFragment = new CustomDialogFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(DIALOG_TITLE, title);
+        bundle.putString(DIALOG_MESSAGE, message);
+        dialogFragment.setArguments(bundle);
+        return dialogFragment;
     }
 }
