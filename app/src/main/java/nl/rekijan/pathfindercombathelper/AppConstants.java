@@ -1,7 +1,7 @@
 package nl.rekijan.pathfindercombathelper;
 
 /**
- * //TODO write description of this class
+ * CONSTANTS
  *
  * @author Erik-Jan Krielen ej.krielen@gmail.com
  * @since 1-4-2016
