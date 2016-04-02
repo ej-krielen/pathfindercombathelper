@@ -1,9 +1,7 @@
 package nl.rekijan.pathfindercombathelper.utilities;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 
 import nl.rekijan.pathfindercombathelper.ui.dialogs.CustomDialogFragment;
 
@@ -27,17 +25,6 @@ public class NavigationHandler {
             sInstance = new NavigationHandler();
         }
         return sInstance;
-    }
-
-    public AlertDialog createDialog(Context context, String title, String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(title).setMessage(message);
-        builder.setPositiveButton(context.getString(android.R.string.ok), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-
-            }
-        });
-        return builder.create();
     }
 
     /**
