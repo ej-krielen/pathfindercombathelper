@@ -37,12 +37,15 @@ public final class CommonUtil {
     }
 
     /**
-     * Hides keyboard if View lost focus
+     * Hides keyboard
+     *
      * @param activity calling activity
-     * @param v View
      */
-    public void hideSoftKeyboard(Activity activity, View v) {
-        InputMethodManager imm =  (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    public void hideSoftKeyboard(Activity activity) {
+        if (activity.getCurrentFocus() != null) {
+            View view = activity.getCurrentFocus();
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

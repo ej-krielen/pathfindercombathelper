@@ -2,29 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLight"
     tools:context="nl.rekijan.pathfindercombathelper.ui.fragments.StartFragment">
 
-    <nl.rekijan.pathfindercombathelper.ui.views.NavigationView
-        android:id="@+id/navTMP"
+    <nl.rekijan.pathfindercombathelper.ui.views.SearchableNavigationView
+        android:id="@+id/searchable_navigation_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/navigation_editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableRight="@android:drawable/ic_search_category_default"
-            android:drawableEnd="@android:drawable/ic_search_category_default"
-            android:hint="@string/navigation_search_hint"
-            android:inputType="textCapSentences|textAutoCorrect|textFilter" />
-        <!--TODO Add custom autocomplete-->
-
-    </nl.rekijan.pathfindercombathelper.ui.views.NavigationView>
-
-    <ListView
-        android:layout_below="@id/navTMP"
-        android:id="@+id/navigation_listView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

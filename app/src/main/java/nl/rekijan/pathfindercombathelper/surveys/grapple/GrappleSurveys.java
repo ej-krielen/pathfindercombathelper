@@ -30,7 +30,10 @@ public final class GrappleSurveys {
     public SurveyModel createSurvey(Context context, String surveyName) {
         SurveyModel survey = new SurveyModel();
 
-        if (context.getString(R.string.grapple_question_start).equals(surveyName)) {
+        surveyName = convertNavItemToQuestion(context, surveyName);
+        surveyName = surveyName != null ? surveyName : "error";
+
+        if (surveyName.equals(context.getString(R.string.grapple_question_start))) {
             survey.setQuestion(surveyName);
 
             AnswerModel answer1 = new AnswerModel(context.getString(R.string.grapple_answer_start_self), "1 clicked");
@@ -49,5 +52,12 @@ public final class GrappleSurveys {
         }
 
         return survey;
+    }
+
+    private String convertNavItemToQuestion(Context context, String navItem) {
+        if (navItem.equals(context.getString(R.string.cmb_grapple))) {
+            return context.getString(R.string.grapple_question_start);
+        }
+        return null;
     }
 }

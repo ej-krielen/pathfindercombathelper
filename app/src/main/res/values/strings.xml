@@ -16,7 +16,7 @@
     <string name="note_icon">Note icon</string>
 
     <!-- Navigation Drawer-->
-    <string name="navigation_search_hint">Filter the list, for example grapple</string>
+    <string name="navigation_search_hint">Search for a topic</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

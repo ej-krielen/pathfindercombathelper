@@ -17,12 +17,13 @@ import nl.rekijan.pathfindercombathelper.ui.fragments.StartFragment;
 import nl.rekijan.pathfindercombathelper.ui.fragments.SurveyFragment;
 import nl.rekijan.pathfindercombathelper.ui.views.AnswerLinearLayout;
 import nl.rekijan.pathfindercombathelper.ui.views.NoteLinearLayout;
+import nl.rekijan.pathfindercombathelper.ui.views.SearchableNavigationView;
 
 import static nl.rekijan.pathfindercombathelper.AppConstants.DIALOG_TAG;
 import static nl.rekijan.pathfindercombathelper.AppConstants.START_FRAGMENT_TAG;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, AnswerLinearLayout.OnAnswerPressedListener, NoteLinearLayout.OnNotePressedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, AnswerLinearLayout.OnAnswerPressedListener, NoteLinearLayout.OnNotePressedListener, SearchableNavigationView.OnNavItemPressedListener {
 
     private CustomDialogFragment mDialogFragment;
 
@@ -142,5 +143,10 @@ public class MainActivity extends AppCompatActivity
         mDialogFragment = dialogFragment != null ? dialogFragment : null;
         if (mDialogFragment != null)
             mDialogFragment.show(getSupportFragmentManager(), DIALOG_TAG);
+    }
+
+    @Override
+    public void onNavItemPressed(String newFragment) {
+        replaceFragment(SurveyFragment.newInstance(newFragment));
     }
 }

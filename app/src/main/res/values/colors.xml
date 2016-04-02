@@ -8,5 +8,6 @@
     <color name="background_error">#FFEF9A9A</color>
 
     <color name="white">#FFFFFF</color>
+    <color name="transparant_white">#afffffff</color>
     <color name="black">#000000</color>
 </resources>
