@@ -93,7 +93,7 @@ public class NavItemAdapter extends ArrayAdapter implements Filterable {
         if (v == null) {
             v = inflater.inflate(R.layout.navitem_list_item, parent, false);
             holder = new ViewHolder();
-            holder.textView = (TextView) v.findViewById(R.id.navitem_list_item_textview);
+            holder.textView = (TextView) v.findViewById(R.id.navitem_list_item_textView);
             v.setTag(holder);
         } else {
             holder = (ViewHolder) v.getTag();

@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import nl.rekijan.pathfindercombathelper.R;
+import nl.rekijan.pathfindercombathelper.models.QuestionModel;
 
 /**
  * Custom class to create custom layout
@@ -17,7 +18,7 @@ import nl.rekijan.pathfindercombathelper.R;
 public class AnswerLinearLayout extends LinearLayout {
 
     public interface OnAnswerPressedListener {
-        void onAnswerPressed(String newFragment);
+        void onAnswerPressed(QuestionModel questionModel);
     }
 
     private OnAnswerPressedListener mListener;
@@ -33,12 +34,12 @@ public class AnswerLinearLayout extends LinearLayout {
         LayoutInflater.from(context).inflate(R.layout.answer_layout, this, true);
     }
 
-    public void setNavigationClickListener(final String newFragment) {
+    public void setOnAnswerClickListener(final QuestionModel questionModel) {
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mListener != null) {
-                    mListener.onAnswerPressed(newFragment);
+                    mListener.onAnswerPressed(questionModel);
                 }
             }
         });

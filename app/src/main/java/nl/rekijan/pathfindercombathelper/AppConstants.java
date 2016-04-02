@@ -11,4 +11,8 @@ public class AppConstants {
     public static final String DIALOG_TITLE = "DIALOG_TITLE";
     public static final String DIALOG_MESSAGE = "DIALOG_MESSAGE";
     public static final String DIALOG_TAG = "DIALOG";
+
+    //Categories
+    public static final String CATEGORY_GRAPPLE = "CATEGORY_GRAPPLE";
+
 }

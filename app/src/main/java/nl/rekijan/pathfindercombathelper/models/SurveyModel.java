@@ -9,16 +9,16 @@ import java.util.List;
  * @since 28-3-2016
  */
 public class SurveyModel {
-    private String question;
+    private QuestionModel question;
     private List<AnswerModel> answers;
     private List<NoteModel> notes;
     private String errorMessage;
 
-    public String getQuestion() {
+    public QuestionModel getQuestionModel() {
         return question;
     }
 
-    public void setQuestion(String question) {
+    public void setQuestionModel(QuestionModel question) {
         this.question = question;
     }
 

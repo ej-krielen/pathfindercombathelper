@@ -10,8 +10,9 @@ import java.util.List;
 import nl.rekijan.pathfindercombathelper.R;
 import nl.rekijan.pathfindercombathelper.models.AnswerModel;
 import nl.rekijan.pathfindercombathelper.models.NoteModel;
+import nl.rekijan.pathfindercombathelper.models.QuestionModel;
 import nl.rekijan.pathfindercombathelper.models.SurveyModel;
-import nl.rekijan.pathfindercombathelper.surveys.grapple.GrappleSurveys;
+import nl.rekijan.pathfindercombathelper.surveys.Surveys;
 
 /**
  * Custom class to create custom layout
@@ -31,15 +32,15 @@ public class SurveyLinearLayout extends LinearLayout {
         mContext = context;
     }
 
-    public void addSurveyToLayout(String surveyName) {
-        SurveyModel survey = GrappleSurveys.getInstance(mContext).createSurvey(mContext, surveyName);
+    public void addSurveyToLayout(QuestionModel questionModel) {
+        SurveyModel survey = Surveys.getInstance(mContext).createSurvey(mContext, questionModel);
         if (!TextUtils.isEmpty(survey.getErrorMessage())) {
             displayError(survey.getErrorMessage());
             return;
         }
 
-        if (!TextUtils.isEmpty(survey.getQuestion()))
-            addQuestion(survey.getQuestion());
+        if (!TextUtils.isEmpty(survey.getQuestionModel().getQuestion()))
+            addQuestion(survey.getQuestionModel().getQuestion());
         if (survey.getAnswers() != null && survey.getAnswers().size() > 0)
             addAnswers(survey.getAnswers());
         if (survey.getNotes() != null && survey.getNotes().size() > 0)
@@ -65,8 +66,8 @@ public class SurveyLinearLayout extends LinearLayout {
         for (AnswerModel answer : answers) {
             AnswerLinearLayout answerLayout = new AnswerLinearLayout(mContext);
             answerLayout.setText(answer.getText());
-            if (!TextUtils.isEmpty(answer.getNavigation()))
-                answerLayout.setNavigationClickListener(answer.getNavigation());
+            if (!TextUtils.isEmpty(answer.getQuestionModel().getQuestion()))
+                answerLayout.setOnAnswerClickListener(answer.getQuestionModel());
             this.addView(answerLayout);
         }
     }

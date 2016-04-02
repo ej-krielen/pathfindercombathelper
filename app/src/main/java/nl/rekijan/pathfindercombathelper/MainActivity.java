@@ -1,7 +1,8 @@
 package nl.rekijan.pathfindercombathelper;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -11,21 +12,38 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 
+import nl.rekijan.pathfindercombathelper.models.QuestionModel;
+import nl.rekijan.pathfindercombathelper.surveys.Surveys;
+import nl.rekijan.pathfindercombathelper.ui.adapters.NavItemAdapter;
 import nl.rekijan.pathfindercombathelper.ui.dialogs.CustomDialogFragment;
 import nl.rekijan.pathfindercombathelper.ui.fragments.StartFragment;
 import nl.rekijan.pathfindercombathelper.ui.fragments.SurveyFragment;
 import nl.rekijan.pathfindercombathelper.ui.views.AnswerLinearLayout;
 import nl.rekijan.pathfindercombathelper.ui.views.NoteLinearLayout;
 import nl.rekijan.pathfindercombathelper.ui.views.SearchableNavigationView;
+import nl.rekijan.pathfindercombathelper.utilities.CommonUtil;
+import nl.rekijan.pathfindercombathelper.utilities.NavigationHandler;
 
 import static nl.rekijan.pathfindercombathelper.AppConstants.DIALOG_TAG;
 import static nl.rekijan.pathfindercombathelper.AppConstants.START_FRAGMENT_TAG;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, AnswerLinearLayout.OnAnswerPressedListener, NoteLinearLayout.OnNotePressedListener, SearchableNavigationView.OnNavItemPressedListener {
+        implements AnswerLinearLayout.OnAnswerPressedListener, NoteLinearLayout.OnNotePressedListener, SearchableNavigationView.OnNavItemPressedListener, Surveys.OnSurveyCreatedListener {
 
     private CustomDialogFragment mDialogFragment;
+    /**
+     * Per the design guidelines, you should show the drawer on launch until the user manually
+     * uses it. This shared preference tracks this.
+     */
+    private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
+    private SharedPreferences sharedPreferences;
+    private DrawerLayout mDrawerLayout;
+    private RelativeLayout mDrawerGroupedLayout;
+    private ListView mNavItemListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,18 +52,28 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //Layout that containts the navigation drawer and the main contain
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //Container that holds all elements of the navigation drawer
+        mDrawerGroupedLayout = (RelativeLayout) findViewById(R.id.drawer_left_group);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        if (drawer != null) {
-            drawer.addDrawerListener(toggle);
+                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        if (mDrawerLayout != null) {
+            mDrawerLayout.addDrawerListener(toggle);
         }
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        if (navigationView != null) {
-            navigationView.setNavigationItemSelectedListener(this);
+        // Read in the flag indicating whether or not the user has demonstrated awareness of the
+        // drawer. See PREF_USER_LEARNED_DRAWER for details.
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean mUserLearnedDrawer = sharedPreferences.getBoolean(PREF_USER_LEARNED_DRAWER, false);
+        if (!mUserLearnedDrawer) {
+            mDrawerLayout.openDrawer(mDrawerGroupedLayout);
         }
+
+        mDrawerLayout.setDrawerListener(new DrawerListener());
+        mNavItemListView = (ListView) findViewById(R.id.navigation_listView);
 
         if (findViewById(R.id.fragment_container) != null) {
             //if we're being restored from a previous state,
@@ -70,6 +98,7 @@ public class MainActivity extends AppCompatActivity
                 drawer.closeDrawer(GravityCompat.START);
             } else {
                 super.onBackPressed();
+                //TODO don't let last fragment (START_FRAGMENT_TAG) be removed
             }
         }
     }
@@ -96,32 +125,6 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    //TODO replace with a custom view that has a ListView that you can filter with an EditTextView
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_bull_rush) {
-
-        } else if (id == R.id.nav_dirty_trick) {
-
-        } else if (id == R.id.nav_disarm) {
-
-        } else if (id == R.id.nav_drag) {
-            replaceFragment(StartFragment.newInstance());
-        } else if (id == R.id.nav_grapple) {
-            replaceFragment(SurveyFragment.newInstance(getString(R.string.grapple_question_start)));
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer != null) {
-            drawer.closeDrawer(GravityCompat.START);
-        }
-        return true;
-    }
-
     private void replaceFragment(Fragment newFragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, newFragment);
@@ -130,8 +133,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onAnswerPressed(String newFragment) {
-        replaceFragment(SurveyFragment.newInstance(newFragment));
+    public void onAnswerPressed(QuestionModel questionModel) {
+        replaceFragment(SurveyFragment.newInstance(questionModel));
     }
 
     @Override
@@ -147,6 +150,42 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onNavItemPressed(String newFragment) {
-        replaceFragment(SurveyFragment.newInstance(newFragment));
+        QuestionModel questionModel = NavigationHandler.getInstance(MainActivity.this).convertNavItemToQuestionModel(MainActivity.this, newFragment);
+        replaceFragment(SurveyFragment.newInstance(questionModel));
+        if (mDrawerLayout.isDrawerOpen(mDrawerGroupedLayout)) {
+            mDrawerLayout.closeDrawer(mDrawerGroupedLayout);
+        }
+    }
+
+    @Override
+    public void onSurveyCreated(String navItem) {
+        NavItemAdapter adapter = (NavItemAdapter) mNavItemListView.getAdapter();
+        adapter.setSelectedNavItem(navItem);
+    }
+
+    private class DrawerListener implements DrawerLayout.DrawerListener {
+
+        @Override
+        public void onDrawerSlide(View drawerView, float slideOffset) {
+        }
+
+        @Override
+        public void onDrawerOpened(View drawerView) {
+        }
+
+        @Override
+        public void onDrawerClosed(View drawerView) {
+            //If the drawer is closed the user has interacted with it
+            //Store that the user has learned to use the navigation drawer
+            //so it doesn't start open on start up
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean(PREF_USER_LEARNED_DRAWER, true);
+            editor.apply();
+        }
+
+        @Override
+        public void onDrawerStateChanged(int newState) {
+            CommonUtil.getInstance(MainActivity.this).hideSoftKeyboard(MainActivity.this);
+        }
     }
 }

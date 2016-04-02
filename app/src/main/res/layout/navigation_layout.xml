@@ -21,9 +21,9 @@
 
     <ListView
         android:id="@+id/navigation_listView"
+        android:choiceMode="singleChoice"
+        android:listSelector="@color/colorAccent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
 </LinearLayout>
-
-

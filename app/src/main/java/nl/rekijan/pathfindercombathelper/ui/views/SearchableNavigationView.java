@@ -70,7 +70,7 @@ public class SearchableNavigationView extends LinearLayout {
             }
         });
 
-        //TODO remove
+        //TODO replace with array of navItems (text + string of first question)
         setNavItems(new String[]{mOwner.getString(R.string.cmb_bull_rush), mOwner.getString(R.string.cmb_dirty_trick), mOwner.getString(R.string.cmb_disarm), mOwner.getString(R.string.cmb_drag), mOwner.getString(R.string.cmb_grapple)});
     }
 

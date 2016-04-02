@@ -8,11 +8,11 @@ package nl.rekijan.pathfindercombathelper.models;
  */
 public class AnswerModel {
     private String text;
-    private String navigation;
+    private QuestionModel questionModel;
 
-    public AnswerModel(String text, String navigation) {
+    public AnswerModel(String text, QuestionModel questionModel) {
         this.text = text;
-        this.navigation = navigation;
+        this.questionModel = questionModel;
     }
 
     public String getText() {
@@ -23,11 +23,11 @@ public class AnswerModel {
         this.text = text;
     }
 
-    public String getNavigation() {
-        return navigation;
+    public QuestionModel getQuestionModel() {
+        return questionModel;
     }
 
-    public void setNavigation(String navigation) {
-        this.navigation = navigation;
+    public void setNQuestionModel(QuestionModel navigation) {
+        this.questionModel = navigation;
     }
 }

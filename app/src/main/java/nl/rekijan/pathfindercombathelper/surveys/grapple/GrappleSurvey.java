@@ -7,38 +7,35 @@ import java.util.Arrays;
 import nl.rekijan.pathfindercombathelper.R;
 import nl.rekijan.pathfindercombathelper.models.AnswerModel;
 import nl.rekijan.pathfindercombathelper.models.NoteModel;
+import nl.rekijan.pathfindercombathelper.models.QuestionModel;
 import nl.rekijan.pathfindercombathelper.models.SurveyModel;
 import nl.rekijan.pathfindercombathelper.utilities.NavigationHandler;
-
+import static nl.rekijan.pathfindercombathelper.AppConstants.CATEGORY_GRAPPLE;
 /**
  * Surveys are built here based on the question String parameter
  *
  * @author Erik-Jan Krielen ej.krielen@gmail.com
  * @since 28-3-2016
  */
-public final class GrappleSurveys {
+public final class GrappleSurvey {
+    private static GrappleSurvey sInstance = null;
 
-    private static GrappleSurveys sInstance = null;
-
-    public static synchronized GrappleSurveys getInstance(Context context) {
+    public static synchronized GrappleSurvey getInstance(Context context) {
         if (sInstance == null) {
-            sInstance = new GrappleSurveys();
+            sInstance = new GrappleSurvey();
         }
         return sInstance;
     }
 
-    public SurveyModel createSurvey(Context context, String surveyName) {
+    public SurveyModel createGrappleSurvey(Context context, String surveyName) {
         SurveyModel survey = new SurveyModel();
-
-        surveyName = convertNavItemToQuestion(context, surveyName);
-        surveyName = surveyName != null ? surveyName : "error";
-
         if (surveyName.equals(context.getString(R.string.grapple_question_start))) {
-            survey.setQuestion(surveyName);
+            QuestionModel question = new QuestionModel(surveyName, CATEGORY_GRAPPLE);
+            survey.setQuestionModel(question);
 
-            AnswerModel answer1 = new AnswerModel(context.getString(R.string.grapple_answer_start_self), "1 clicked");
-            AnswerModel answer2 = new AnswerModel(context.getString(R.string.grapple_answer_start_grappled), "2 clicked");
-            AnswerModel answer3 = new AnswerModel(context.getString(R.string.grapple_answer_start_grappling), "3 clicked");
+            AnswerModel answer1 = new AnswerModel(context.getString(R.string.grapple_answer_start_self), new QuestionModel("1 clicked", CATEGORY_GRAPPLE));
+            AnswerModel answer2 = new AnswerModel(context.getString(R.string.grapple_answer_start_grappled), new QuestionModel("2 clicked", CATEGORY_GRAPPLE));
+            AnswerModel answer3 = new AnswerModel(context.getString(R.string.grapple_answer_start_grappling), new QuestionModel("3 clicked", CATEGORY_GRAPPLE));
 
             survey.setAnswers(Arrays.asList(answer1, answer2, answer3));
 
@@ -50,14 +47,6 @@ public final class GrappleSurveys {
         } else {
             survey.setErrorMessage(context.getString(R.string.error_surveyName));
         }
-
         return survey;
-    }
-
-    private String convertNavItemToQuestion(Context context, String navItem) {
-        if (navItem.equals(context.getString(R.string.cmb_grapple))) {
-            return context.getString(R.string.grapple_question_start);
-        }
-        return null;
     }
 }
