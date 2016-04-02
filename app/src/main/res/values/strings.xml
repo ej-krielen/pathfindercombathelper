@@ -47,6 +47,10 @@
         \nIf a grappled creature becomes invisible, through a spell or other ability, it gains a +2 circumstance bonus on its CMD to avoid being grappled, but receives no other benefit.
     </string>
 
+    <!-- General answers-->
+    <string name="answer_yes">Yes</string>
+    <string name="answer_no">No</string>
+
     <!-- Grapple-->
     <string name="grapple_question_start">Which situation applies?</string>
     <string name="grapple_answer_start_self">I want to start a grapple on my opponent.</string>
@@ -54,6 +58,7 @@
     <string name="grapple_answer_start_grappling">It\'s my turn and I am grappling my opponent.</string>
     <string name="grapple_note_start_action">Normally starting a grapple is a standard action.</string>
     <string name="grapple_note_start_grapple_condition">Read more about the grappled condition.</string>
+    <string name="grapple_question_avoid_aoo">Do you have Improved Grapple feat, the Grab ability, or another way to avoid provoking an Attack of Opportunity?</string>
 
 
 </resources>

@@ -33,7 +33,7 @@ public final class GrappleSurvey {
             QuestionModel question = new QuestionModel(surveyName, CATEGORY_GRAPPLE);
             survey.setQuestionModel(question);
 
-            AnswerModel answer1 = new AnswerModel(context.getString(R.string.grapple_answer_start_self), new QuestionModel("1 clicked", CATEGORY_GRAPPLE));
+            AnswerModel answer1 = new AnswerModel(context.getString(R.string.grapple_answer_start_self), new QuestionModel(context.getString(R.string.grapple_question_avoid_aoo), CATEGORY_GRAPPLE));
             AnswerModel answer2 = new AnswerModel(context.getString(R.string.grapple_answer_start_grappled), new QuestionModel("2 clicked", CATEGORY_GRAPPLE));
             AnswerModel answer3 = new AnswerModel(context.getString(R.string.grapple_answer_start_grappling), new QuestionModel("3 clicked", CATEGORY_GRAPPLE));
 
@@ -44,6 +44,13 @@ public final class GrappleSurvey {
                     NavigationHandler.getInstance(context).createDialogFragment(context.getString(R.string.conditions), context.getString(R.string.condition_grappled)));
 
             survey.setNotes(Arrays.asList(note1, note2));
+        } else if (surveyName.equals(context.getString(R.string.grapple_question_avoid_aoo))) {
+            QuestionModel question = new QuestionModel(surveyName, CATEGORY_GRAPPLE);
+            survey.setQuestionModel(question);
+
+            AnswerModel answer1 = new AnswerModel(context.getString(R.string.answer_yes), new QuestionModel("1 clicked", CATEGORY_GRAPPLE));
+            AnswerModel answer2 = new AnswerModel(context.getString(R.string.answer_no), new QuestionModel("2 clicked", CATEGORY_GRAPPLE));
+            survey.setAnswers(Arrays.asList(answer1, answer2));
         } else {
             survey.setErrorMessage(context.getString(R.string.error_surveyName));
         }
