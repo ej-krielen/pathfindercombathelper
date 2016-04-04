@@ -97,8 +97,11 @@ public class MainActivity extends AppCompatActivity
             if (drawer.isDrawerOpen(GravityCompat.START)) {
                 drawer.closeDrawer(GravityCompat.START);
             } else {
-                super.onBackPressed();
-                //TODO don't let last fragment (START_FRAGMENT_TAG) be removed
+                if (getSupportFragmentManager().getBackStackEntryCount() > 1 ) {
+                    getSupportFragmentManager().popBackStackImmediate();
+                } else {
+                    this.finish();
+                }
             }
         }
     }
@@ -140,7 +143,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onNotePressed(CustomDialogFragment dialogFragment) {
         //Hide previous dialog if there is one
-        if (mDialogFragment != null && mDialogFragment.getDialog().isShowing())
+        if (mDialogFragment != null && mDialogFragment.getDialog() != null && mDialogFragment.getDialog().isShowing())
             mDialogFragment.dismiss();
         //Show new dialog
         mDialogFragment = dialogFragment != null ? dialogFragment : null;
