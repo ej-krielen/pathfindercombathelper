@@ -41,7 +41,7 @@ public final class GrappleSurvey {
 
             NoteModel note1 = new NoteModel(context.getString(R.string.grapple_note_start_action));
             NoteModel note2 = new NoteModel(context.getString(R.string.grapple_note_start_grapple_condition),
-                    NavigationHandler.getInstance(context).createDialogFragment(context.getString(R.string.conditions), context.getString(R.string.condition_grappled)));
+                    NavigationHandler.getInstance(context).createDialogFragment(context.getString(R.string.condition_grappled_title), context.getString(R.string.condition_grappled_message)));
 
             survey.setNotes(Arrays.asList(note1, note2));
         } else if (surveyName.equals(context.getString(R.string.grapple_question_avoid_aoo))) {
