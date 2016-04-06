@@ -2,6 +2,8 @@ package nl.rekijan.pathfindercombathelper.ui.views;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -31,7 +33,7 @@ import nl.rekijan.pathfindercombathelper.utilities.CommonUtil;
  * @author Erik-Jan Krielen ej.krielen@gmail.com
  * @since 28-3-2016
  */
-public class SearchableNavigationView extends LinearLayout {
+public class SearchableNavigationView extends LinearLayout implements SharedPreferences.OnSharedPreferenceChangeListener {
     public interface OnNavItemPressedListener {
         void onNavItemPressed(QuestionModel questionModel);
     }
@@ -57,6 +59,7 @@ public class SearchableNavigationView extends LinearLayout {
                     + " must implement OnNavItemPressedListener");
         }
         mApp = (AppExtension) context.getApplicationContext();
+        PreferenceManager.getDefaultSharedPreferences(context).registerOnSharedPreferenceChangeListener(this);
 
         LayoutInflater.from(context).inflate(R.layout.navigation_layout, this, true);
 
@@ -78,6 +81,12 @@ public class SearchableNavigationView extends LinearLayout {
             }
         });
 
+        setNavItems(mApp.getNavItems());
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        mApp.createOrUpdateNavItems();
         setNavItems(mApp.getNavItems());
     }
 

@@ -1,6 +1,8 @@
 package nl.rekijan.pathfindercombathelper;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,21 +24,32 @@ import static nl.rekijan.pathfindercombathelper.AppConstants.CATEGORY_GRAPPLE;
  */
 public class AppExtension extends Application {
 
-    private List<NavItemModel> navItems = new ArrayList<>();
+    private List<NavItemModel> navItems;
 
     @Override
     public void onCreate() {
         super.onCreate();
-
-        createNavItems();
+        setDefaultValues();
+        createOrUpdateNavItems();
     }
 
-    private void createNavItems() {
-        navItems.add(new NavItemModel(getString(R.string.cmb_bull_rush), new QuestionModel(getString(R.string.cmb_bull_rush), CATEGORY_BULL_RUSH)));
-        navItems.add(new NavItemModel(getString(R.string.cmb_dirty_trick), new QuestionModel(getString(R.string.cmb_dirty_trick), CATEGORY_DIRTY_TRICK)));
-        navItems.add(new NavItemModel(getString(R.string.cmb_disarm), new QuestionModel(getString(R.string.cmb_disarm), CATEGORY_DISARM)));
-        navItems.add(new NavItemModel(getString(R.string.cmb_drag), new QuestionModel(getString(R.string.cmb_drag), CATEGORY_DRAG)));
-        navItems.add(new NavItemModel(getString(R.string.cmb_grapple), new QuestionModel(getString(R.string.grapple_question_start), CATEGORY_GRAPPLE)));
+    private void setDefaultValues() {
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+    }
+
+    public void createOrUpdateNavItems() {
+        navItems = new ArrayList<>();
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        if (sharedPref.getBoolean("pref_bull_rush", true))
+            navItems.add(new NavItemModel(getString(R.string.cmb_bull_rush), new QuestionModel(getString(R.string.cmb_bull_rush), CATEGORY_BULL_RUSH)));
+        if (sharedPref.getBoolean("pref_dirty_trick", true))
+            navItems.add(new NavItemModel(getString(R.string.cmb_dirty_trick), new QuestionModel(getString(R.string.cmb_dirty_trick), CATEGORY_DIRTY_TRICK)));
+        if (sharedPref.getBoolean("pref_disarm", true))
+            navItems.add(new NavItemModel(getString(R.string.cmb_disarm), new QuestionModel(getString(R.string.cmb_disarm), CATEGORY_DISARM)));
+        if (sharedPref.getBoolean("pref_drag", true))
+            navItems.add(new NavItemModel(getString(R.string.cmb_drag), new QuestionModel(getString(R.string.cmb_drag), CATEGORY_DRAG)));
+        if (sharedPref.getBoolean("pref_grapple", true))
+            navItems.add(new NavItemModel(getString(R.string.cmb_grapple), new QuestionModel(getString(R.string.grapple_question_start), CATEGORY_GRAPPLE)));
     }
 
     public List<NavItemModel> getNavItems() {

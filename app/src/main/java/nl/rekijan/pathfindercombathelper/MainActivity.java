@@ -1,5 +1,6 @@
 package nl.rekijan.pathfindercombathelper;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -18,6 +19,7 @@ import android.widget.RelativeLayout;
 
 import nl.rekijan.pathfindercombathelper.models.QuestionModel;
 import nl.rekijan.pathfindercombathelper.surveys.Surveys;
+import nl.rekijan.pathfindercombathelper.ui.activities.SettingsActivity;
 import nl.rekijan.pathfindercombathelper.ui.adapters.NavItemAdapter;
 import nl.rekijan.pathfindercombathelper.ui.dialogs.CustomDialogFragment;
 import nl.rekijan.pathfindercombathelper.ui.fragments.StartFragment;
@@ -121,6 +123,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
 

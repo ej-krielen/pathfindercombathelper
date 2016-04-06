@@ -32,6 +32,7 @@
 
     <!-- Settings-->
     <string name="action_settings">Settings</string>
+    <string name="pref_show_navItem">Show this item in the navigation list</string>
 
     <!-- Surveys-->
     <string name="notes_title">Notes</string>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference
+        android:key="pref_bull_rush"
+        android:title="@string/cmb_bull_rush"
+        android:summary="@string/pref_show_navItem"
+        android:defaultValue="true" />
+    <CheckBoxPreference
+        android:key="pref_dirty_trick"
+        android:title="@string/cmb_dirty_trick"
+        android:summary="@string/pref_show_navItem"
+        android:defaultValue="true" />
+    <CheckBoxPreference
+        android:key="pref_disarm"
+        android:title="@string/cmb_disarm"
+        android:summary="@string/pref_show_navItem"
+        android:defaultValue="true" />
+    <CheckBoxPreference
+        android:key="pref_drag"
+        android:title="@string/cmb_drag"
+        android:summary="@string/pref_show_navItem"
+        android:defaultValue="true" />
+    <CheckBoxPreference
+        android:key="pref_grapple"
+        android:title="@string/cmb_grapple"
+        android:summary="@string/pref_show_navItem"
+        android:defaultValue="true" />
+</PreferenceScreen>

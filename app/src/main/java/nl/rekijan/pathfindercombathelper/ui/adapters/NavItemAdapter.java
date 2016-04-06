@@ -23,7 +23,7 @@ import nl.rekijan.pathfindercombathelper.models.NavItemModel;
  * @since 2-4-2016
  */
 public class NavItemAdapter extends ArrayAdapter<NavItemModel> implements Filterable {
-    private final Context context;
+    private final Context mContext;
     public ArrayList<NavItemModel> navItemsArrayList;
     public ArrayList<NavItemModel> preSearchArrayList;
     private String selectedNavItem;
@@ -31,11 +31,10 @@ public class NavItemAdapter extends ArrayAdapter<NavItemModel> implements Filter
 
     public NavItemAdapter(Context context, int resourceId, List<NavItemModel> navItems, ListView listView) {
         super(context, resourceId);
-        this.context = context;
+        mContext = context;
         mListView = listView;
         addAll(navItems);
         navItemsArrayList = new ArrayList<>(navItems);
-
     }
 
     public void setSelectedNavItem(String selectedNavItem) {
@@ -85,7 +84,7 @@ public class NavItemAdapter extends ArrayAdapter<NavItemModel> implements Filter
     @Override
     public View getView(int position, View v, ViewGroup parent) {
         ViewHolder holder;
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         NavItemModel navItem = getItem(position);
 
