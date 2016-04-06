@@ -5,15 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Filter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 import nl.rekijan.pathfindercombathelper.R;
+import nl.rekijan.pathfindercombathelper.models.NavItemModel;
 
 /**
  * Custom adapter for navigation items
@@ -21,22 +22,20 @@ import nl.rekijan.pathfindercombathelper.R;
  * @author Erik-Jan Krielen ej.krielen@gmail.com
  * @since 2-4-2016
  */
-public class NavItemAdapter extends ArrayAdapter implements Filterable {
+public class NavItemAdapter extends ArrayAdapter<NavItemModel> implements Filterable {
     private final Context context;
-    public ArrayList<String> navItemsArrayList;
-    public ArrayList<String> preSearchArrayList;
+    public ArrayList<NavItemModel> navItemsArrayList;
+    public ArrayList<NavItemModel> preSearchArrayList;
     private String selectedNavItem;
     private ListView mListView;
 
-    public NavItemAdapter(Context context, int resourceId, String[] navItems, ListView listView) {
+    public NavItemAdapter(Context context, int resourceId, List<NavItemModel> navItems, ListView listView) {
         super(context, resourceId);
         this.context = context;
         mListView = listView;
-        for (String navItem : navItems) {
-            add(navItem);
-        }
-        navItemsArrayList = new ArrayList<>(navItems.length);
-        navItemsArrayList.addAll(Arrays.asList(navItems));
+        addAll(navItems);
+        navItemsArrayList = new ArrayList<>(navItems);
+
     }
 
     public void setSelectedNavItem(String selectedNavItem) {
@@ -52,13 +51,13 @@ public class NavItemAdapter extends ArrayAdapter implements Filterable {
             @Override
             protected FilterResults performFiltering(CharSequence query) {
                 final FilterResults oReturn = new FilterResults();
-                final ArrayList<String> results = new ArrayList<>();
+                final ArrayList<NavItemModel> results = new ArrayList<>();
                 if (preSearchArrayList == null)
                     preSearchArrayList = navItemsArrayList;
                 if (query != null) {
                     if (preSearchArrayList != null && preSearchArrayList.size() > 0) {
-                        for (final String navItem : preSearchArrayList) {
-                            if (navItem.toLowerCase().contains(query.toString()))
+                        for (final NavItemModel navItem : preSearchArrayList) {
+                            if (navItem.getTitle().toLowerCase().contains(query.toString()))
                                 results.add(navItem);
                         }
                     }
@@ -71,9 +70,9 @@ public class NavItemAdapter extends ArrayAdapter implements Filterable {
             @Override
             protected void publishResults(CharSequence constraint,
                                           FilterResults results) {
-                navItemsArrayList = (ArrayList<String>) results.values;
+                navItemsArrayList = (ArrayList<NavItemModel>) results.values;
                 clear();
-                for (String navItem : navItemsArrayList) {
+                for (NavItemModel navItem : navItemsArrayList) {
                     add(navItem);
                 }
                 notifyDataSetChanged();
@@ -88,7 +87,7 @@ public class NavItemAdapter extends ArrayAdapter implements Filterable {
         ViewHolder holder;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        String navItem = getItem(position).toString();
+        NavItemModel navItem = getItem(position);
 
         if (v == null) {
             v = inflater.inflate(R.layout.navitem_list_item, parent, false);
@@ -99,8 +98,8 @@ public class NavItemAdapter extends ArrayAdapter implements Filterable {
             holder = (ViewHolder) v.getTag();
         }
         if (navItem != null) {
-            holder.textView.setText(navItem);
-            if (navItem.equals(selectedNavItem))
+            holder.textView.setText(navItem.getTitle());
+            if (navItem.getTitle().equals(selectedNavItem))
                 ((ListView) parent).setItemChecked(position, true);
         }
         return v;

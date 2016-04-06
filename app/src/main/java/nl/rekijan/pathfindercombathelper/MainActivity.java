@@ -26,7 +26,6 @@ import nl.rekijan.pathfindercombathelper.ui.views.AnswerLinearLayout;
 import nl.rekijan.pathfindercombathelper.ui.views.NoteLinearLayout;
 import nl.rekijan.pathfindercombathelper.ui.views.SearchableNavigationView;
 import nl.rekijan.pathfindercombathelper.utilities.CommonUtil;
-import nl.rekijan.pathfindercombathelper.utilities.NavigationHandler;
 
 import static nl.rekijan.pathfindercombathelper.AppConstants.DIALOG_TAG;
 import static nl.rekijan.pathfindercombathelper.AppConstants.START_FRAGMENT_TAG;
@@ -97,7 +96,7 @@ public class MainActivity extends AppCompatActivity
             if (drawer.isDrawerOpen(GravityCompat.START)) {
                 drawer.closeDrawer(GravityCompat.START);
             } else {
-                if (getSupportFragmentManager().getBackStackEntryCount() > 1 ) {
+                if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
                     getSupportFragmentManager().popBackStackImmediate();
                 } else {
                     this.finish();
@@ -141,19 +140,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onNotePressed(CustomDialogFragment dialogFragment) {
-        //Hide previous dialog if there is one
-        if (mDialogFragment != null && mDialogFragment.getDialog() != null && mDialogFragment.getDialog().isShowing())
-            mDialogFragment.dismiss();
-        //Show new dialog
-        mDialogFragment = dialogFragment != null ? dialogFragment : null;
-        if (mDialogFragment != null)
-            mDialogFragment.show(getSupportFragmentManager(), DIALOG_TAG);
-    }
-
-    @Override
-    public void onNavItemPressed(String newFragment) {
-        QuestionModel questionModel = NavigationHandler.getInstance(MainActivity.this).convertNavItemToQuestionModel(MainActivity.this, newFragment);
+    public void onNavItemPressed(QuestionModel questionModel) {
         replaceFragment(SurveyFragment.newInstance(questionModel));
         if (mDrawerLayout.isDrawerOpen(mDrawerGroupedLayout)) {
             mDrawerLayout.closeDrawer(mDrawerGroupedLayout);
@@ -164,6 +151,17 @@ public class MainActivity extends AppCompatActivity
     public void onSurveyCreated(String navItem) {
         NavItemAdapter adapter = (NavItemAdapter) mNavItemListView.getAdapter();
         adapter.setSelectedNavItem(navItem);
+    }
+
+    @Override
+    public void onNotePressed(CustomDialogFragment dialogFragment) {
+        //Hide previous dialog if there is one
+        if (mDialogFragment != null && mDialogFragment.getDialog() != null && mDialogFragment.getDialog().isShowing())
+            mDialogFragment.dismiss();
+        //Show new dialog
+        mDialogFragment = dialogFragment != null ? dialogFragment : null;
+        if (mDialogFragment != null)
+            mDialogFragment.show(getSupportFragmentManager(), DIALOG_TAG);
     }
 
     private class DrawerListener implements DrawerLayout.DrawerListener {

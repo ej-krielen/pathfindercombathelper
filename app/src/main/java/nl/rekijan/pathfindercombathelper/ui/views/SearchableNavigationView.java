@@ -16,7 +16,12 @@ import android.widget.Filter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import java.util.List;
+
+import nl.rekijan.pathfindercombathelper.AppExtension;
 import nl.rekijan.pathfindercombathelper.R;
+import nl.rekijan.pathfindercombathelper.models.NavItemModel;
+import nl.rekijan.pathfindercombathelper.models.QuestionModel;
 import nl.rekijan.pathfindercombathelper.ui.adapters.NavItemAdapter;
 import nl.rekijan.pathfindercombathelper.utilities.CommonUtil;
 
@@ -28,7 +33,7 @@ import nl.rekijan.pathfindercombathelper.utilities.CommonUtil;
  */
 public class SearchableNavigationView extends LinearLayout {
     public interface OnNavItemPressedListener {
-        void onNavItemPressed(String newFragment);
+        void onNavItemPressed(QuestionModel questionModel);
     }
 
     private EditText mSearchView;
@@ -36,6 +41,7 @@ public class SearchableNavigationView extends LinearLayout {
     private NavItemAdapter mAdapter;
     private Activity mOwner;
     private OnNavItemPressedListener mListener;
+    private final AppExtension mApp;
 
     public SearchableNavigationView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
@@ -50,6 +56,8 @@ public class SearchableNavigationView extends LinearLayout {
             throw new RuntimeException(context.toString()
                     + " must implement OnNavItemPressedListener");
         }
+        mApp = (AppExtension) context.getApplicationContext();
+
         LayoutInflater.from(context).inflate(R.layout.navigation_layout, this, true);
 
         mNavigationList = (ListView) findViewById(R.id.navigation_listView);
@@ -70,11 +78,10 @@ public class SearchableNavigationView extends LinearLayout {
             }
         });
 
-        //TODO replace with array of navItems (text + string of first question)
-        setNavItems(new String[]{mOwner.getString(R.string.cmb_bull_rush), mOwner.getString(R.string.cmb_dirty_trick), mOwner.getString(R.string.cmb_disarm), mOwner.getString(R.string.cmb_drag), mOwner.getString(R.string.cmb_grapple)});
+        setNavItems(mApp.getNavItems());
     }
 
-    public void setNavItems(String[] navItems) {
+    public void setNavItems(List<NavItemModel> navItems) {
         mAdapter = new NavItemAdapter(getContext(), R.layout.navitem_list_item, navItems, mNavigationList);
         mNavigationList.setAdapter(mAdapter);
     }
@@ -84,10 +91,10 @@ public class SearchableNavigationView extends LinearLayout {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
             NavItemAdapter adapter = (NavItemAdapter) adapterView.getAdapter();
-            String navItem = adapter.getItem(position).toString();
-            if (!TextUtils.isEmpty(navItem)) {
+            NavItemModel navItem = adapter.getItem(position);
+            if (!TextUtils.isEmpty(navItem.getTitle())) {
                 if (mListener != null) {
-                    mListener.onNavItemPressed(navItem);
+                    mListener.onNavItemPressed(navItem.getQuestionModel());
                     CommonUtil.getInstance(mOwner).hideSoftKeyboard(mOwner);
                 }
             }

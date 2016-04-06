@@ -13,6 +13,10 @@ public class AppConstants {
     public static final String DIALOG_TAG = "DIALOG";
 
     //Categories
+    public static final String CATEGORY_BULL_RUSH = "CATEGORY_BULL_RUSH";
+    public static final String CATEGORY_DIRTY_TRICK = "CATEGORY_DIRTY_TRICK";
+    public static final String CATEGORY_DISARM = "CATEGORY_DISARM";
+    public static final String CATEGORY_DRAG = "CATEGORY_DRAG";
     public static final String CATEGORY_GRAPPLE = "CATEGORY_GRAPPLE";
 
 }
