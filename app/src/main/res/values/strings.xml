@@ -19,7 +19,14 @@
     <string name="navigation_search_hint">Search for a topic</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="start_fragment_text">Open the navigation drawer to select a topic</string>
 
+    <!-- Categories-->
+    <string name="navigation_category_cmb">Combat maneuvers</string>
+    <string name="navigation_category_other">Other</string>
+
+    <!-- Items-->
+    <!-- Combat maneuvers-->
     <string name="cmb_bull_rush">Bull Rush</string>
     <string name="cmb_dirty_trick">Dirty Trick</string>
     <string name="cmb_disarm">Disarm</string>
@@ -29,6 +36,11 @@
     <string name="cmb_reposition">Reposition</string>
     <string name="cmb_steal">Steal</string>
     <string name="cmb_sunder">Sunder</string>
+
+    <!-- Other-->
+    <string name="poison">Poison</string>
+
+    <!-- End items-->
 
     <!-- Settings-->
     <string name="action_settings">Settings</string>
@@ -60,6 +72,5 @@
     <string name="grapple_note_start_action">Normally starting a grapple is a standard action.</string>
     <string name="grapple_note_start_grapple_condition">Read more about the grappled condition.</string>
     <string name="grapple_question_avoid_aoo">Do you have Improved Grapple feat, the Grab ability, or another way to avoid provoking an Attack of Opportunity?</string>
-
 
 </resources>

@@ -7,7 +7,9 @@ import nl.rekijan.pathfindercombathelper.R;
 import nl.rekijan.pathfindercombathelper.models.QuestionModel;
 import nl.rekijan.pathfindercombathelper.models.SurveyModel;
 import nl.rekijan.pathfindercombathelper.surveys.grapple.GrappleSurvey;
+
 import static nl.rekijan.pathfindercombathelper.AppConstants.*;
+
 /**
  * Surveys are built here based on the question String parameter
  *
@@ -40,15 +42,20 @@ public final class Surveys {
         if (questionModel != null && !TextUtils.isEmpty(questionModel.getCategory())) {
             switch (questionModel.getCategory()) {
                 case CATEGORY_GRAPPLE:
-                    mListener.onSurveyCreated(context.getString(R.string.cmb_grapple));
+                    if (mListener != null)
+                        mListener.onSurveyCreated(context.getString(R.string.cmb_grapple));
                     survey = GrappleSurvey.getInstance(context).createGrappleSurvey(context, questionModel.getQuestion());
                     break;
                 default:
+                    if (mListener != null)
+                        mListener.onSurveyCreated("");
                     survey = new SurveyModel();
                     survey.setErrorMessage(context.getString(R.string.error_surveyName));
                     break;
             }
         } else {
+            if (mListener != null)
+                mListener.onSurveyCreated("");
             survey = new SurveyModel();
             survey.setErrorMessage(context.getString(R.string.error_surveyName));
         }

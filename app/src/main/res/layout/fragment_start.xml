@@ -2,12 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryLight"
     tools:context="nl.rekijan.pathfindercombathelper.ui.fragments.StartFragment">
 
-    <nl.rekijan.pathfindercombathelper.ui.views.SearchableNavigationView
-        android:id="@+id/searchable_navigation_view"
+    <TextView
+        android:id="@+id/start_fragment_textView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/small_padding"
+        android:text="@string/start_fragment_text" />
 </RelativeLayout>

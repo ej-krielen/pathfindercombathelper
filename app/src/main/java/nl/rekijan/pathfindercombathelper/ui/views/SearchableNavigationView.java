@@ -1,23 +1,20 @@
 package nl.rekijan.pathfindercombathelper.ui.views;
 
 import android.app.Activity;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.text.Editable;
+import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.Filter;
+import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
+import java.util.HashMap;
 import java.util.List;
 
 import nl.rekijan.pathfindercombathelper.AppExtension;
@@ -33,13 +30,13 @@ import nl.rekijan.pathfindercombathelper.utilities.CommonUtil;
  * @author Erik-Jan Krielen ej.krielen@gmail.com
  * @since 28-3-2016
  */
-public class SearchableNavigationView extends LinearLayout implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class SearchableNavigationView extends LinearLayout implements SharedPreferences.OnSharedPreferenceChangeListener,
+        SearchView.OnQueryTextListener, SearchView.OnCloseListener {
     public interface OnNavItemPressedListener {
         void onNavItemPressed(QuestionModel questionModel);
     }
 
-    private EditText mSearchView;
-    private ListView mNavigationList;
+    private ExpandableListView mNavigationList;
     private NavItemAdapter mAdapter;
     private Activity mOwner;
     private OnNavItemPressedListener mListener;
@@ -63,14 +60,17 @@ public class SearchableNavigationView extends LinearLayout implements SharedPref
 
         LayoutInflater.from(context).inflate(R.layout.navigation_layout, this, true);
 
-        mNavigationList = (ListView) findViewById(R.id.navigation_listView);
-        mNavigationList.setOnItemClickListener(new onNavItemClickListener());
+        mNavigationList = (ExpandableListView) findViewById(R.id.navigation_expandableListView);
+        mNavigationList.setOnChildClickListener(new onNavItemClickListener());
         mNavigationList.setTextFilterEnabled(false);
 
-        mSearchView = (EditText) findViewById(R.id.navigation_editText);
-        mSearchView.addTextChangedListener(new onTextChangedListener());
+        SearchManager searchManager = (SearchManager) mOwner.getSystemService(Context.SEARCH_SERVICE);
+        SearchView mSearchView = (SearchView) findViewById(R.id.navigation_searchView);
+        mSearchView.setSearchableInfo(searchManager.getSearchableInfo(mOwner.getComponentName()));
+        mSearchView.setIconified(false);
+        mSearchView.setOnQueryTextListener(this);
+        mSearchView.setOnCloseListener(this);
 
-        mSearchView.setOnTouchListener(new rightDrawableClickListener());
         mSearchView.setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -81,66 +81,61 @@ public class SearchableNavigationView extends LinearLayout implements SharedPref
             }
         });
 
-        setNavItems(mApp.getNavItems());
+        setNavItems(mApp.getHeaders(), mApp.getNavItems());
+        expandAll();
+    }
+
+    private void expandAll() {
+        int count = mAdapter.getGroupCount();
+        for (int i = 0; i < count; i++) {
+            mNavigationList.expandGroup(i);
+        }
     }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        mApp.createOrUpdateNavItems();
-        setNavItems(mApp.getNavItems());
+        mApp.createOrUpdateNavigation();
+        setNavItems(mApp.getHeaders(), mApp.getNavItems());
     }
 
-    public void setNavItems(List<NavItemModel> navItems) {
-        mAdapter = new NavItemAdapter(getContext(), R.layout.navitem_list_item, navItems, mNavigationList);
+    public void setNavItems(List<String> headers, HashMap<String, List<NavItemModel>> navItems) {
+        mAdapter = new NavItemAdapter(getContext(), headers, navItems);
         mNavigationList.setAdapter(mAdapter);
+        expandAll();
     }
 
-    private class onNavItemClickListener implements AdapterView.OnItemClickListener {
+    @Override
+    public boolean onClose() {
+        mAdapter.filterData("");
+        expandAll();
+        return false;
+    }
 
+    @Override
+    public boolean onQueryTextChange(String query) {
+        mAdapter.filterData(query);
+        expandAll();
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        mAdapter.filterData(query);
+        expandAll();
+        return false;
+    }
+
+    private class onNavItemClickListener implements ExpandableListView.OnChildClickListener {
         @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-            NavItemAdapter adapter = (NavItemAdapter) adapterView.getAdapter();
-            NavItemModel navItem = adapter.getItem(position);
+        public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+            final NavItemModel navItem = (NavItemModel) mAdapter.getChild(groupPosition, childPosition);
             if (!TextUtils.isEmpty(navItem.getTitle())) {
                 if (mListener != null) {
                     mListener.onNavItemPressed(navItem.getQuestionModel());
                     CommonUtil.getInstance(mOwner).hideSoftKeyboard(mOwner);
                 }
             }
-        }
-    }
-
-    private class rightDrawableClickListener implements OnTouchListener {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            final int DRAWABLE_RIGHT = 2;
-
-            if (event.getAction() == MotionEvent.ACTION_UP) {
-                if (event.getRawX() >= (mSearchView.getRight() - mSearchView.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                    mNavigationList.requestFocus();
-                    CommonUtil.getInstance(mOwner).hideSoftKeyboard(mOwner);
-                    return true;
-                }
-            }
             return false;
-        }
-    }
-
-    private class onTextChangedListener implements TextWatcher {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            if (s != null && mAdapter != null) {
-                Filter filter = mAdapter.getFilter();
-                filter.filter(s.toString().toLowerCase());
-            }
         }
     }
 }

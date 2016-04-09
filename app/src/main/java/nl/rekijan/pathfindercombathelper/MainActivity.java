@@ -1,9 +1,7 @@
 package nl.rekijan.pathfindercombathelper;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -14,7 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
+import android.widget.ExpandableListView;
 import android.widget.RelativeLayout;
 
 import nl.rekijan.pathfindercombathelper.models.QuestionModel;
@@ -33,18 +31,14 @@ import static nl.rekijan.pathfindercombathelper.AppConstants.DIALOG_TAG;
 import static nl.rekijan.pathfindercombathelper.AppConstants.START_FRAGMENT_TAG;
 
 public class MainActivity extends AppCompatActivity
-        implements AnswerLinearLayout.OnAnswerPressedListener, NoteLinearLayout.OnNotePressedListener, SearchableNavigationView.OnNavItemPressedListener, Surveys.OnSurveyCreatedListener {
+        implements AnswerLinearLayout.OnAnswerPressedListener, NoteLinearLayout.OnNotePressedListener,
+        StartFragment.OnOpenDrawerClicked,
+        SearchableNavigationView.OnNavItemPressedListener, Surveys.OnSurveyCreatedListener {
 
     private CustomDialogFragment mDialogFragment;
-    /**
-     * Per the design guidelines, you should show the drawer on launch until the user manually
-     * uses it. This shared preference tracks this.
-     */
-    private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
-    private SharedPreferences sharedPreferences;
     private DrawerLayout mDrawerLayout;
     private RelativeLayout mDrawerGroupedLayout;
-    private ListView mNavItemListView;
+    private ExpandableListView mNavItemListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +47,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Layout that containts the navigation drawer and the main contain
+        //Layout that contains the navigation drawer and the main contain
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         //Container that holds all elements of the navigation drawer
         mDrawerGroupedLayout = (RelativeLayout) findViewById(R.id.drawer_left_group);
@@ -65,16 +59,9 @@ public class MainActivity extends AppCompatActivity
         }
         toggle.syncState();
 
-        // Read in the flag indicating whether or not the user has demonstrated awareness of the
-        // drawer. See PREF_USER_LEARNED_DRAWER for details.
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean mUserLearnedDrawer = sharedPreferences.getBoolean(PREF_USER_LEARNED_DRAWER, false);
-        if (!mUserLearnedDrawer) {
-            mDrawerLayout.openDrawer(mDrawerGroupedLayout);
-        }
-
-        mDrawerLayout.setDrawerListener(new DrawerListener());
-        mNavItemListView = (ListView) findViewById(R.id.navigation_listView);
+        mDrawerLayout.openDrawer(mDrawerGroupedLayout);
+        mDrawerLayout.addDrawerListener(new DrawerListener());
+        mNavItemListView = (ExpandableListView) findViewById(R.id.navigation_expandableListView);
 
         if (findViewById(R.id.fragment_container) != null) {
             //if we're being restored from a previous state,
@@ -137,11 +124,21 @@ public class MainActivity extends AppCompatActivity
         transaction.commit();
     }
 
+    /**
+     * Callback when an answer has been clicked on
+     *
+     * @param questionModel new question to be asked
+     */
     @Override
     public void onAnswerPressed(QuestionModel questionModel) {
         replaceFragment(SurveyFragment.newInstance(questionModel));
     }
 
+    /**
+     * Callback when a {@link nl.rekijan.pathfindercombathelper.models.NavItemModel NavItemModel} has been clicked on
+     *
+     * @param questionModel new question to be asked
+     */
     @Override
     public void onNavItemPressed(QuestionModel questionModel) {
         replaceFragment(SurveyFragment.newInstance(questionModel));
@@ -150,12 +147,22 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Callback when a new Survey has been created to set check which item in the navigation drawer should be selected with the accent color
+     *
+     * @param navItem name of the NavigationModel that needs to be selected
+     */
     @Override
     public void onSurveyCreated(String navItem) {
-        NavItemAdapter adapter = (NavItemAdapter) mNavItemListView.getAdapter();
+        NavItemAdapter adapter = (NavItemAdapter) mNavItemListView.getExpandableListAdapter();
         adapter.setSelectedNavItem(navItem);
     }
 
+    /**
+     * Callback when a note has been pressed and a dialog needs to be opened
+     *
+     * @param dialogFragment dialog associated with the note that has to be opened
+     */
     @Override
     public void onNotePressed(CustomDialogFragment dialogFragment) {
         //Hide previous dialog if there is one
@@ -167,6 +174,14 @@ public class MainActivity extends AppCompatActivity
             mDialogFragment.show(getSupportFragmentManager(), DIALOG_TAG);
     }
 
+    /**
+     * Callback to open the drawer from the {@link StartFragment}
+     */
+    @Override
+    public void onOpenDrawerClicked() {
+        mDrawerLayout.openDrawer(mDrawerGroupedLayout);
+    }
+
     private class DrawerListener implements DrawerLayout.DrawerListener {
 
         @Override
@@ -175,16 +190,11 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         public void onDrawerOpened(View drawerView) {
+
         }
 
         @Override
         public void onDrawerClosed(View drawerView) {
-            //If the drawer is closed the user has interacted with it
-            //Store that the user has learned to use the navigation drawer
-            //so it doesn't start open on start up
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean(PREF_USER_LEARNED_DRAWER, true);
-            editor.apply();
         }
 
         @Override
