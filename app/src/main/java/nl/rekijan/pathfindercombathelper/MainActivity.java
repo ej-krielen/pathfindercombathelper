@@ -2,6 +2,7 @@ package nl.rekijan.pathfindercombathelper;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -180,6 +181,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onOpenDrawerClicked() {
         mDrawerLayout.openDrawer(mDrawerGroupedLayout);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+        ((AppExtension) getApplicationContext()).createOrUpdateNavigation();
     }
 
     private class DrawerListener implements DrawerLayout.DrawerListener {
