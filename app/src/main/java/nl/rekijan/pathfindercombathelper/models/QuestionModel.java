@@ -18,7 +18,7 @@ public class QuestionModel implements Parcelable {
         this.category = category;
     }
 
-    protected QuestionModel(Parcel in) {
+    private QuestionModel(Parcel in) {
         question = in.readString();
         category = in.readString();
     }

@@ -27,9 +27,9 @@ public class NavItemAdapter extends BaseExpandableListAdapter {
 
     private final Context mContext;
     private List<String> mListDataHeader;
-    private List<String> mOriginalHeader;
+    private final List<String> mOriginalHeader;
     private HashMap<String, List<NavItemModel>> mListDataChild;
-    private HashMap<String, List<NavItemModel>> mOriginalChild;
+    private final HashMap<String, List<NavItemModel>> mOriginalChild;
     private String selectedNavItem;
 
     public NavItemAdapter(Context context, List<String> listDataHeader,
@@ -111,7 +111,7 @@ public class NavItemAdapter extends BaseExpandableListAdapter {
         String headerTitle = (String) getGroup(groupPosition);
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.navigation_list_group, null);
+            convertView = inflater.inflate(R.layout.navigation_list_group, parent, false);
         }
 
         TextView lblListHeader = (TextView) convertView.findViewById(R.id.lblListHeader);
@@ -133,6 +133,7 @@ public class NavItemAdapter extends BaseExpandableListAdapter {
 
     /**
      * Rebuilds the list based on the query
+     *
      * @param query String entered in the SearchView of {@link nl.rekijan.pathfindercombathelper.ui.views.SearchableNavigationView SearchableNavigationView}
      */
     public void filterData(String query) {

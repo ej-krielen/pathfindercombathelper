@@ -16,7 +16,6 @@
     <string name="note_icon">Note icon</string>
 
     <!-- Navigation Drawer-->
-    <string name="navigation_search_hint">Search for a topic</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="start_fragment_text">Open the navigation drawer to select a topic</string>
