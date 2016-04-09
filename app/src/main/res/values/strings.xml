@@ -54,7 +54,7 @@
     <string name="condition_grappled_message">
         Grappled creatures cannot move and take a –4 penalty to Dexterity, a –2 penalty on all attack rolls and combat maneuver checks, except those made to grapple or escape a grapple.
         \nA grappled creatures can take no action that requires two hands to perform, and they cannot make attacks of opportunity.
-        \n \nCasting Spells while Grappled/Grappling: The only spells which can be cast while grappling or pinned are those without somatic components and whose material components (if any) you have in hand.
+        \n \nCasting Spells while Grappled/Grappling: \nThe only spells which can be cast while grappling or pinned are those without somatic components and whose material components (if any) you have in hand.
         \nEven so, you must make a concentration check (DC 10 + the grappler\'s CMB + the level of the spell you\'re casting) or lose the spell.
         \n \nA grappled creature cannot use Stealth to hide from the creature grappling it, even if a special ability, such as hide in plain sight, would normally allow it to do so.
         \nIf a grappled creature becomes invisible, through a spell or other ability, it gains a +2 circumstance bonus on its CMD to avoid being grappled, but receives no other benefit.

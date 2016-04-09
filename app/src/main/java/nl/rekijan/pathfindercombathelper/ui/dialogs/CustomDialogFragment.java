@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 
+import nl.rekijan.pathfindercombathelper.R;
+
 import static nl.rekijan.pathfindercombathelper.AppConstants.DIALOG_MESSAGE;
 import static nl.rekijan.pathfindercombathelper.AppConstants.DIALOG_TITLE;
 
@@ -19,7 +21,7 @@ public class CustomDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Bundle args = getArguments();
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Dialog);
         builder.setTitle(args.getString(DIALOG_TITLE))
                 .setMessage(args.getString(DIALOG_MESSAGE))
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
