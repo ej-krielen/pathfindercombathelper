@@ -44,7 +44,7 @@ public final class Surveys {
                 case CATEGORY_GRAPPLE:
                     if (mListener != null)
                         mListener.onSurveyCreated(context.getString(R.string.cmb_grapple));
-                    survey = GrappleSurvey.getInstance(context).createGrappleSurvey(context, questionModel.getQuestion());
+                    survey = GrappleSurvey.getInstance(context).createGrappleSurvey(context, questionModel);
                     break;
                 default:
                     if (mListener != null)

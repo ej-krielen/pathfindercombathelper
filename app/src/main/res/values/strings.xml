@@ -66,6 +66,9 @@
     <!-- General answers-->
     <string name="answer_yes">Yes</string>
     <string name="answer_no">No</string>
+    <string name="answer_continue">Continue</string>
+    <string name="answer_succes">Success</string>
+    <string name="answer_fail">Fail</string>
 
     <!-- Grapple-->
     <string name="grapple_question_start">Which situation applies?</string>
@@ -75,5 +78,25 @@
     <string name="grapple_note_start_action">Normally starting a grapple is a standard action.</string>
     <string name="grapple_note_start_grapple_condition">Read more about the grappled condition.</string>
     <string name="grapple_question_avoid_aoo">Do you have Improved Grapple feat, the Grab ability, or another way to avoid provoking an Attack of Opportunity?</string>
+    <string name="grapple_note_improved_grapple">Improved grapple gives +2 on checks made to grapple a foe and means you don\'t provoke.</string>
+    <string name="grapple_note_grab">Grab can be used after a natural attack as a free action, does not provoke and gets a +4 bonus. Read more.</string>
+    <string name="grapple_dialog_grab_title">Special attack: Grab (Ex)</string>
+    <string name="grapple_dialog_grab_message">If a creature with this special attack hits with the indicated attack (usually a claw or bite attack), it deals normal damage and attempts to start a grapple as a free action without provoking an attack of opportunity.
+        Unless otherwise noted, grab can only be used against targets of a size equal to or smaller than the creature with this ability. If the creature can use grab on creatures of other sizes, it is noted in the creature\'s Special Attacks line.
+        The creature has the option to conduct the grapple normally, or simply use the part of its body it used in the grab to hold the opponent. If it chooses to do the latter, it takes a –20 penalty on its CMB check to make and maintain the grapple,
+        but does not gain the grappled condition itself. A successful hold does not deal any extra damage unless the creature also has the constrict special attack. If the creature does not constrict,
+        each successful grapple check it makes during successive rounds automatically deals the damage indicated for the attack that established the hold. Otherwise, it deals constriction damage as well (the amount is given in the creature’s descriptive text).
+        \n \nCreatures with the grab special attack receive a +4 bonus on combat maneuver checks made to start and maintain a grapple.</string>
+    <string name="grapple_question_provoked">You provoked an Attack of Opportunity. Does it hit?</string>
+    <string name="grapple_question_provoked_hit">You take damage from the attack normally and apply that damage as a penalty to your CMB roll.</string>
+    <string name="grapple_question_cmb_roll">Roll your CMB vs the defender\'s CMD</string>
+    <string name="grapple_question_grapple_fails">Grapple fails. The action is wasted. And neither party is considered grappled.</string>
+    <string name="grapple_question_adjacent">Is your target adjacent to you?</string>
+    <string name="grapple_question_adjacent_available">Is an open adjacent space available?</string>
+    <string name="grapple_question_move_adjacent">Choose an open adjacent square next to you to move your target into.</string>
+    <string name="grapple_question_attacker_grappled">You have successfully grappled your opponent</string>
+    <string name="grapple_success_note">You and your opponent both gain the grappled condition. As long as you maintain control of the grapple, you can release the grapple with a free action.</string>
+    <string name="grapple_success_note_bonus">As long as you maintain control of the grapple you get a +5 bonus on CMB to maintain the grapple.</string>
+
 
 </resources>
