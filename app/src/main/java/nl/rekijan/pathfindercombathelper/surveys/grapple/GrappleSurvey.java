@@ -68,6 +68,9 @@ public final class GrappleSurvey {
 
             AnswerModel answer1 = new AnswerModel(context.getString(R.string.answer_continue), new QuestionModel(context.getString(R.string.grapple_question_cmb_roll), CATEGORY_GRAPPLE));
             survey.setAnswers(Collections.singletonList(answer1));
+
+            NoteModel note1 = new NoteModel(context.getString(R.string.grapple_note_cmb_roll));
+            survey.setNotes(Collections.singletonList(note1));
         } else if (questionModel.getQuestion().equals(context.getString(R.string.grapple_question_cmb_roll))) {
             survey.setQuestionModel(questionModel);
 

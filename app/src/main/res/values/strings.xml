@@ -90,13 +90,14 @@
     <string name="grapple_question_provoked">You provoked an Attack of Opportunity. Does it hit?</string>
     <string name="grapple_question_provoked_hit">You take damage from the attack normally and apply that damage as a penalty to your CMB roll.</string>
     <string name="grapple_question_cmb_roll">Roll your CMB vs the defender\'s CMD</string>
+    <string name="grapple_note_cmb_roll">Humanoid creatures without two free hands attempting to grapple a foe take a –4 penalty on the combat maneuver roll.</string>
     <string name="grapple_question_grapple_fails">Grapple fails. The action is wasted. And neither party is considered grappled.</string>
     <string name="grapple_question_adjacent">Is your target adjacent to you?</string>
     <string name="grapple_question_adjacent_available">Is an open adjacent space available?</string>
     <string name="grapple_question_move_adjacent">Choose an open adjacent square next to you to move your target into.</string>
     <string name="grapple_question_attacker_grappled">You have successfully grappled your opponent</string>
     <string name="grapple_success_note">You and your opponent both gain the grappled condition. As long as you maintain control of the grapple, you can release the grapple with a free action.</string>
-    <string name="grapple_success_note_bonus">As long as you maintain control of the grapple you get a +5 bonus on CMB to maintain the grapple.</string>
+    <string name="grapple_success_note_bonus">If your target does not break the grapple, you get a +5 circumstance bonus on grapple checks made against the same target in subsequent rounds.</string>
 
 
 </resources>
