@@ -6,7 +6,7 @@ import android.text.TextUtils;
 import nl.rekijan.pathfindercombathelper.R;
 import nl.rekijan.pathfindercombathelper.models.QuestionModel;
 import nl.rekijan.pathfindercombathelper.models.SurveyModel;
-import nl.rekijan.pathfindercombathelper.surveys.grapple.GrappleSurvey;
+import nl.rekijan.pathfindercombathelper.surveys.combatmaneuvers.GrappleSurvey;
 
 import static nl.rekijan.pathfindercombathelper.AppConstants.*;
 

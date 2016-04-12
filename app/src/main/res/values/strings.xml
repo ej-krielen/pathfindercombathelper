@@ -70,6 +70,9 @@
     <string name="answer_succes">Success</string>
     <string name="answer_fail">Fail</string>
 
+    <!-- General notes-->
+    <string name="note_standard_action">Doing this takes a standard action</string>
+
     <!-- Grapple-->
     <string name="grapple_question_start">Which situation applies?</string>
     <string name="grapple_answer_start_self">I want to start a grapple on my opponent.</string>
@@ -98,6 +101,31 @@
     <string name="grapple_question_attacker_grappled">You have successfully grappled your opponent</string>
     <string name="grapple_success_note">You and your opponent both gain the grappled condition. As long as you maintain control of the grapple, you can release the grapple with a free action.</string>
     <string name="grapple_success_note_bonus">If your target does not break the grapple, you get a +5 circumstance bonus on grapple checks made against the same target in subsequent rounds.</string>
+    <string name="grapple_question_defend_start">Are you pinned?</string>
+    <string name="grapple_question_pinned">Do you want to try and free yourself?</string>
+    <string name="grapple_answer_pinned_cast">No, I want to try and cast a spell or spell-like ability</string>
+    <string name="grapple_question_pinned_cast">I am pinned and want to cast a spell or a spell-like ability</string>
+    <string name="grapple_note_pinned_restricted">A pinned creature cannot move and is denied its Dexterity bonus, gets a -4 penalty to AC.</string>
+    <string name="grapple_note_pinned_actions">A pinned creature can take verbal and mental actions, but cannot cast spells that require a somatic or material component.</string>
+    <string name="grapple_note_pinned_casting">A pinned creature that attempts to cast a spell must make a concentration  check (DC 10 + grappler\'s CMB + spell level) or lose the spell.</string>
+    <string name="grapple_note_pinned_condition">Pinned is a more severe version of grappled, and their effects do not stack.</string>
+    <string name="grapple_question_defend_start_choose">What do you want to do?</string>
+    <string name="grapple_note_defending">You \'t take any action that requires two hands. Spells can\'t have a somatic component, and any material component you have to have in hand.</string>
+    <string name="grapple_question_free_yourself">To free yourself roll a CMB check or Escape Artist check versus the attackers CMD.</string>
+    <string name="grapple_answer_free_myself">I want to try and free myself</string>
+    <string name="grapple_answer_control">I want to attempt to become the controlling grappler</string>
+    <string name="grapple_question_control">To take control roll a CMB check or Escape Artist check versus the attackers CMD.</string>
+    <string name="grapple_question_failed_cmd">Both parties continue to have the grappled condition. The attacker is still controlling the grapple.</string>
+    <string name="grapple_question_defender_takes_control">You are now the controlling grappler, and get the +5 bonus to successive checks to maintain the grapple.</string>
+    <string name="grapple_question_defender_escapes">You escape. Both parties lose the grappled condition.</string>
+    <string name="grapple_answer_attack">I want to attack</string>
+    <string name="grapple_question_attack">You can attack or full attack with a light or one-handed weapon.</string>
+    <string name="grapple_note_attack">These attacks get a -2 penalty to hit.</string>
+    <string name="grapple_note_attack_range">You may attack any target in your reach.</string>
+    <string name="grapple_answer_cast">I want to cast a spell or spell-like ability.</string>
+    <string name="grapple_question_cast">I want to cast a spell or spell-like ability.</string>
+    <string name="grapple_note_cast_restriction">You can only cast a spell without somatic components, and if it has a material component you have to have it in hand.</string>
+    <string name="grapple_note_cast_check">Make a concentration check (DC10 + grappler\'s CMB + spell level) or lose the spell. </string>
 
 
 </resources>
