@@ -53,6 +53,7 @@
     <string name="notes_title">Notes</string>
 
     <!-- Conditions-->
+    <string name="note_grapple_condition">Read more about the grappled condition.</string>
     <string name="condition_grappled_title">Grappled Condition</string>
     <string name="condition_grappled_message">
         Grappled creatures cannot move and take a –4 penalty to Dexterity, a –2 penalty on all attack rolls and combat maneuver checks, except those made to grapple or escape a grapple.
@@ -62,16 +63,27 @@
         \n \nA grappled creature cannot use Stealth to hide from the creature grappling it, even if a special ability, such as hide in plain sight, would normally allow it to do so.
         \nIf a grappled creature becomes invisible, through a spell or other ability, it gains a +2 circumstance bonus on its CMD to avoid being grappled, but receives no other benefit.
     </string>
+    <string name="condition_tied_up_title">What does being tied up mean?</string>
+    <string name="condition_tied_up_message">A creature that is tied up is "bound" which means it has the Helpless condition.
+        \nA helpless target is treated as having a Dex of 0 (–5 modifier). Melee attacks against a helpless target get a +4 bonus (equivalent to attacking a prone target).
+        \nRanged attacks get no special bonus against helpless targets. Creatures with the sneak attack ability can sneak attack helpless targets.</string>
+    <string name="note_pinned_condition">Read more about the pinned condition.</string>
+    <string name="condition_pinned_title">Pinned Condition</string>
+    <string name="condition_pinned_message">A pinned creature cannot move and is denied its Dexterity bonus, gets a -4 penalty to AC.
+    \n \nA pinned creature can take verbal and mental actions, but cannot cast spells that require a somatic or material component.
+    \n \nA pinned creature that attempts to cast a spell must make a concentration  check (DC 10 + grappler\'s CMB + spell level) or lose the spell.
+    \n \nPinned is a more severe version of grappled, and their effects do not stack.</string>
 
     <!-- General answers-->
     <string name="answer_yes">Yes</string>
     <string name="answer_no">No</string>
     <string name="answer_continue">Continue</string>
-    <string name="answer_succes">Success</string>
+    <string name="answer_success">Success</string>
     <string name="answer_fail">Fail</string>
 
     <!-- General notes-->
-    <string name="note_standard_action">Doing this takes a standard action</string>
+    <string name="note_standard_action">Doing this normally takes a standard action</string>
+    <string name="note_free_action">Doing this normally takes a free action</string>
 
     <!-- Grapple-->
     <string name="grapple_question_start">Which situation applies?</string>
@@ -79,7 +91,6 @@
     <string name="grapple_answer_start_grappled">It\'s my turn and my opponent is grappling me.</string>
     <string name="grapple_answer_start_grappling">It\'s my turn and I am grappling my opponent.</string>
     <string name="grapple_note_start_action">Normally starting a grapple is a standard action.</string>
-    <string name="grapple_note_start_grapple_condition">Read more about the grappled condition.</string>
     <string name="grapple_question_avoid_aoo">Do you have Improved Grapple feat, the Grab ability, or another way to avoid provoking an Attack of Opportunity?</string>
     <string name="grapple_note_improved_grapple">Improved grapple gives +2 on checks made to grapple a foe and means you don\'t provoke.</string>
     <string name="grapple_note_grab">Grab can be used after a natural attack as a free action, does not provoke and gets a +4 bonus. Read more.</string>
@@ -105,11 +116,7 @@
     <string name="grapple_question_pinned">Do you want to try and free yourself?</string>
     <string name="grapple_answer_pinned_cast">No, I want to try and cast a spell or spell-like ability</string>
     <string name="grapple_question_pinned_cast">I am pinned and want to cast a spell or a spell-like ability</string>
-    <string name="grapple_note_pinned_restricted">A pinned creature cannot move and is denied its Dexterity bonus, gets a -4 penalty to AC.</string>
-    <string name="grapple_note_pinned_actions">A pinned creature can take verbal and mental actions, but cannot cast spells that require a somatic or material component.</string>
-    <string name="grapple_note_pinned_casting">A pinned creature that attempts to cast a spell must make a concentration  check (DC 10 + grappler\'s CMB + spell level) or lose the spell.</string>
-    <string name="grapple_note_pinned_condition">Pinned is a more severe version of grappled, and their effects do not stack.</string>
-    <string name="grapple_question_defend_start_choose">What do you want to do?</string>
+    <string name="grapple_question_defend_start_choose">You are grappled. What do you want to do?</string>
     <string name="grapple_note_defending">You \'t take any action that requires two hands. Spells can\'t have a somatic component, and any material component you have to have in hand.</string>
     <string name="grapple_question_free_yourself">To free yourself roll a CMB check or Escape Artist check versus the attackers CMD.</string>
     <string name="grapple_answer_free_myself">I want to try and free myself</string>
@@ -118,7 +125,7 @@
     <string name="grapple_question_failed_cmd">Both parties continue to have the grappled condition. The attacker is still controlling the grapple.</string>
     <string name="grapple_question_defender_takes_control">You are now the controlling grappler, and get the +5 bonus to successive checks to maintain the grapple.</string>
     <string name="grapple_question_defender_escapes">You escape. Both parties lose the grappled condition.</string>
-    <string name="grapple_answer_attack">I want to attack</string>
+    <string name="grapple_answer_attack_grappled">I am grappled but want to attack</string>
     <string name="grapple_question_attack">You can attack or full attack with a light or one-handed weapon.</string>
     <string name="grapple_note_attack">These attacks get a -2 penalty to hit.</string>
     <string name="grapple_note_attack_range">You may attack any target in your reach.</string>
@@ -126,6 +133,31 @@
     <string name="grapple_question_cast">I want to cast a spell or spell-like ability.</string>
     <string name="grapple_note_cast_restriction">You can only cast a spell without somatic components, and if it has a material component you have to have it in hand.</string>
     <string name="grapple_note_cast_check">Make a concentration check (DC10 + grappler\'s CMB + spell level) or lose the spell. </string>
-
+    <string name="grapple_question_grappling_choose">You are controlling the grapple. What do you want to do?</string>
+    <string name="grapple_answer_release_grapple">I want to release the grapple (free action)</string>
+    <string name="grapple_question_release">Both parties lose the grappled condition</string>
+    <string name="grapple_answer_tie_up">I want to tie up my opponent</string>
+    <string name="grapple_question_tie_easy">Is your opponent pinned, restrained, or unconscious?</string>
+    <string name="grapple_question_tie_up">You tie up your opponent.</string>
+    <string name="grapple_note_tied_up">This works like the pin effect, but the DC to escape the bonds is equal to 20 + your CMB.</string>
+    <string name="grapple_note_tied_up_escape">If the DC to escape is higher than 20 + the target\'s CMB, the target cannot escape from the bonds, even with a natural 20.</string>
+    <string name="grapple_question_tie_up_unrestrained">Make a CMB check with a -10 versus your opponent\'s CMD to tie him up.</string>
+    <string name="grapple_question_tie_up_unrestrained_failed">You continue having control of the grapple, but fail to tie up your opponent.</string>
+    <string name="grapple_answer_maintain">I want to maintain the grapple and perform another action after.</string>
+    <string name="grapple_question_maintain">Roll your CMB versus your opponent\'s CMD to maintain the grapple</string>
+    <string name="grapple_note_maintain">On this role the following applies: You get a +5 circumstance bonus on grapple checks made against the same target in subsequent rounds</string>
+    <string name="grapple_question_maintain_success">You maintained the grappled. Choose your follow-up action.</string>
+    <string name="grapple_note_maintain_success">Taking one of these steps is optional, you may also choose to just maintain the grapple.</string>
+    <string name="grapple_answer_move">I want to move my opponent</string>
+    <string name="grapple_question_move">You can move both yourself and your target up to half your speed.</string>
+    <string name="grapple_note_move_adjacent">At the end of your movement, you can place your target in any square adjacent to you.</string>
+    <string name="grapple_note_move_danger">If you attempt to place your foe in a hazardous location, such as in a wall of fire or over a pit, the target receives a free attempt to break your grapple with a +4 bonus.</string>
+    <string name="grapple_answer_attack_maintained">I want to inflict damage</string>
+    <string name="grapple_question_attack_maintained">You deal damage with an appropriate weapon</string>
+    <string name="grapple_note_grapple_weapons">You can choose your unarmed strike, a natural attack, or an attack made with armor spikes or a light or one-handed weapon.</string>
+    <string name="grapple_note_damage_type">You can choose to do lethal or non-lethal damage</string>
+    <string name="grapple_answer_pin">I want to pin my opponent</string>
+    <string name="grapple_question_pin">You give your opponent the pinned condition</string>
+    <string name="grapple_note_pinning_ac">Despite pinning your opponent, you still only have the grappled condition, but you lose your Dexterity bonus to AC</string>
 
 </resources>
